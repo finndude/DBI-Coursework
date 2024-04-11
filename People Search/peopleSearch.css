@@ -43,6 +43,14 @@ nav ul
 
 /*----------------------------------*/
 
+.results
+{
+    border: 2px solid black;
+    padding: 10px;
+}
+
+/*----------------------------------*/
+
 .sidebar {
     border: 2px solid black;
     padding: 10px;
