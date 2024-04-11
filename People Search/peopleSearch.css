@@ -1,14 +1,20 @@
-.mainHeader 
-{
-    border: 2px solid black;
-    padding: 20px;
-}
+/*---------------------------------------------------------------------*/
 
 h1 
 {
     margin: 0;
     text-align: center;
 }
+
+/*----------------------------------*/
+
+.mainHeader 
+{
+    border: 2px solid black;
+    padding: 20px;
+}
+
+/*----------------------------------*/
 
 nav ul 
 {
@@ -19,6 +25,14 @@ nav ul
 
 /*---------------------------------------------------------------------*/
 
+.center 
+{
+    display: flex;
+    margin-top: 20px;
+}
+
+/*----------------------------------*/
+
 .mainBody 
 {
     border: 2px solid black;
@@ -27,26 +41,22 @@ nav ul
     flex: 2;
 }
 
-.mainBody p 
-{
-    margin: 0;
-}
+/*----------------------------------*/
 
-/*---------------------------------------------------------------------*/
-
-.center 
-{
-    display: flex;
-    margin-top: 20px;
-}
-
-.sidebar 
-{
+.sidebar {
     border: 2px solid black;
     padding: 10px;
     flex: 1;
+    max-width: 150px; /* Set the maximum width of the sidebar */
 }
 
+/*----------------------------------*/
+
+.sidebar img 
+{
+    max-width: 100%;
+    height: auto;
+}
 
 /*---------------------------------------------------------------------*/
 
@@ -57,6 +67,11 @@ footer
     margin-top: 20px; /* Add space between mainBody and footer */
 }
 
-footer p {
+/*----------------------------------*/
+
+footer p 
+{
     margin: 0;
 }
+
+/*---------------------------------------------------------------------*/
