@@ -1,0 +1,86 @@
+/*---------------------------------------------------------------------*/
+
+h1 
+{
+    margin: 0;
+    text-align: center;
+}
+
+/*----------------------------------*/
+
+.mainHeader 
+{
+    border: 2px solid black;
+    padding: 20px;
+}
+
+/*----------------------------------*/
+
+nav ul 
+{
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+}
+
+/*---------------------------------------------------------------------*/
+
+.center 
+{
+    display: flex;
+    margin-top: 20px;
+}
+
+/*----------------------------------*/
+
+.mainBody 
+{
+    border: 2px solid black;
+    padding: 10px;
+    margin-left: 20px; /* Add space between sidebar and main body */
+    flex: 2;
+}
+
+/*----------------------------------*/
+
+.results
+{
+    border: 2px solid black;
+    padding: 10px;
+}
+
+/*----------------------------------*/
+
+.sidebar 
+{
+    border: 2px solid black;
+    padding: 10px;
+    flex: 1;
+    max-width: 150px; /* Set the maximum width of the sidebar */
+}
+
+/*----------------------------------*/
+
+.sidebar img 
+{
+    max-width: 100%;
+    height: auto;
+}
+
+/*---------------------------------------------------------------------*/
+
+footer
+{
+    border: 2px solid black;
+    padding: 10px;
+    margin-top: 20px; /* Add space between mainBody and footer */
+}
+
+/*----------------------------------*/
+
+footer p 
+{
+    margin: 0;
+}
+
+/*---------------------------------------------------------------------*/
