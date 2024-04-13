@@ -10,6 +10,7 @@
     grid-template-rows: auto 1fr auto; /* Header, Main, Footer take up their content height */
     grid-template-columns: auto 4fr; /* Sidebar takes up one unit of width, main content takes up four units */
     height: 97vh; /* Full viewport height */
+    background-color: lightblue; /* Set light blue background color */
 }
 
 /*-----------------------------------------------------------------------------------------------*/
