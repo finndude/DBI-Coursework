@@ -1,19 +1,22 @@
 /*---------------------------------------------------------------------*/
 
-body {
+body 
+{
     display: grid;
     grid-template-areas:
         "header"
-        "sidebar main"
+        "sidebar"
+        "main"
         "footer";
-    grid-template-columns: 1fr; /* Adjust as needed */
-    grid-template-rows: auto 1fr auto; /* Adjust as needed */
-    height: 100vh; /* Ensure full height */
+    grid-template-rows: auto;
+    grid-template-columns: 1fr;
+    height: 100vh; /* Ensures full viewport height */
 }
 
 /*----------------------------------*/
 
-.mainHeader {
+.mainHeader 
+{
     grid-area: header;
     border: 2px solid black;
     padding: 20px;
@@ -21,7 +24,8 @@ body {
 
 /*----------------------------------*/
 
-nav ul {
+nav ul 
+{
     display: flex;
     justify-content: space-around;
     list-style-type: none;
@@ -29,14 +33,16 @@ nav ul {
 
 /*----------------------------------*/
 
-.center {
-    display: flex;
+.center 
+{
+    display: grid;
     margin-top: 20px;
 }
 
 /*----------------------------------*/
 
-.mainBody {
+.mainBody 
+{
     grid-area: main;
     border: 2px solid black;
     padding: 10px;
@@ -45,14 +51,16 @@ nav ul {
 
 /*----------------------------------*/
 
-.results {
+.results 
+{
     border: 2px solid black;
     padding: 10px;
 }
 
 /*----------------------------------*/
 
-.sidebar {
+.sidebar 
+{
     grid-area: sidebar;
     border: 2px solid black;
     padding: 10px;
@@ -61,14 +69,16 @@ nav ul {
 
 /*----------------------------------*/
 
-.sidebar img {
+.sidebar img 
+{
     max-width: 100%;
     height: auto;
 }
 
 /*---------------------------------------------------------------------*/
 
-footer {
+footer 
+{
     grid-area: footer;
     border: 2px solid black;
     padding: 10px;
@@ -76,7 +86,8 @@ footer {
 
 /*----------------------------------*/
 
-footer p {
+footer p 
+{
     margin: 0;
 }
 
