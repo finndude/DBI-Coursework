@@ -10,6 +10,8 @@ async function fetchData()
 
 fetchData();
 
+console.log('Driver Name:');
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Wait for the DOM to be fully loaded before executing any code
