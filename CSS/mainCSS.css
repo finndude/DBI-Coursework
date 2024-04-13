@@ -1,6 +1,5 @@
 /*-----------------------------------------------------------------------------------------------*/
 
-/* Grid container */
 .gridContainer 
 {
     display: grid;
@@ -15,7 +14,6 @@
 
 /*-----------------------------------------------------------------------------------------------*/
 
-/* Header styles */
 .mainHeader 
 {
     grid-area: header;
@@ -62,7 +60,6 @@ nav ul li
 
 /*-----------------------------------------------------------------------------------------------*/
 
-/* Main content styles */
 .mainBody 
 {
     grid-area: main;
@@ -70,6 +67,8 @@ nav ul li
     padding: 0px 10px; /* Add padding inside the border */
     margin-top: 10px;
     margin-left: 10px;
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack items vertically */
 }
 
 /*---------------------------------------------*/
@@ -78,12 +77,12 @@ nav ul li
 {
     border: 2px solid black; /* Add border around the results */
     padding: 0px 10px; /* Add padding inside the border */
-    height: 80%;
+    flex: 1; /* Allow the results box to grow and fill the remaining space */
+    margin-bottom: 10px;
 }
 
 /*-----------------------------------------------------------------------------------------------*/
 
-/* Footer styles */
 footer 
 {
     grid-area: footer;
