@@ -1,85 +1,82 @@
 /*---------------------------------------------------------------------*/
 
-h1 
-{
-    margin: 0;
-    text-align: center;
+body {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "sidebar main"
+        "footer";
+    grid-template-columns: 1fr; /* Adjust as needed */
+    grid-template-rows: auto 1fr auto; /* Adjust as needed */
+    height: 100vh; /* Ensure full height */
 }
 
 /*----------------------------------*/
 
-.mainHeader 
-{
+.mainHeader {
+    grid-area: header;
     border: 2px solid black;
     padding: 20px;
 }
 
 /*----------------------------------*/
 
-nav ul 
-{
+nav ul {
     display: flex;
     justify-content: space-around;
     list-style-type: none;
 }
 
-/*---------------------------------------------------------------------*/
+/*----------------------------------*/
 
-.center 
-{
+.center {
     display: flex;
     margin-top: 20px;
 }
 
 /*----------------------------------*/
 
-.mainBody 
-{
+.mainBody {
+    grid-area: main;
     border: 2px solid black;
     padding: 10px;
     margin-left: 20px; /* Add space between sidebar and main body */
-    flex: 2;
 }
 
 /*----------------------------------*/
 
-.results
-{
+.results {
     border: 2px solid black;
     padding: 10px;
 }
 
 /*----------------------------------*/
 
-.sidebar 
-{
+.sidebar {
+    grid-area: sidebar;
     border: 2px solid black;
     padding: 10px;
-    flex: 1;
     max-width: 150px; /* Set the maximum width of the sidebar */
 }
 
 /*----------------------------------*/
 
-.sidebar img 
-{
+.sidebar img {
     max-width: 100%;
     height: auto;
 }
 
 /*---------------------------------------------------------------------*/
 
-footer
-{
+footer {
+    grid-area: footer;
     border: 2px solid black;
     padding: 10px;
-    margin-top: 20px; /* Add space between mainBody and footer */
 }
 
 /*----------------------------------*/
 
-footer p 
-{
+footer p {
     margin: 0;
 }
 
