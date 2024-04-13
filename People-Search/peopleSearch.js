@@ -10,28 +10,19 @@ async function fetchData()
 
 fetchData();
 
-console.log('Driver Name:');
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Wait for the DOM to be fully loaded before executing any code
-document.addEventListener('DOMContentLoaded', function() {
-    // Get the form element
-    var form = document.getElementById('peopleSearchForm');
+document.getElementById('peopleSearchForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    
+    const driverName = document.getElementById('driverName').value;
+    const licenseNumber = document.getElementById('licenseNumber').value;
+    const results = document.querySelector('.results');
 
-    // Add an event listener for the form submission
-    form.addEventListener('submit', function(event) {
-        // Prevent the default form submission behavior
-        event.preventDefault();
+    if (driverName.trim() === '' && licenseNumber.trim() === '') {
+        results.textContent = 'Please enter values';
+        return;
+    }
 
-        // Get the values from the input fields
-        var driverName = document.getElementById('driverName').value;
-        var licenseNumber = document.getElementById('licenseNumber').value;
-
-        // Log the values to the console for demonstration purposes
-        console.log('Driver Name:', driverName);
-        console.log('License Number:', licenseNumber);
-
-        // You can perform further actions here, such as sending the data to a server or querying a database
-    });
+    // Add code here to handle the case where one or both fields are not empty
 });
