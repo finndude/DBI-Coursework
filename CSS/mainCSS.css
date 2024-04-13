@@ -1,13 +1,12 @@
 /* Grid container */
-.grid-container {
+.gridContainer {
     display: grid;
     grid-template-areas:
-        "header"
-        "sidebar"
-        "main"
-        "footer";
+        "header header"
+        "sidebar main"
+        "footer footer";
     grid-template-rows: auto 1fr auto; /* Header, Main, Footer take up their content height */
-    grid-template-columns: 1fr; /* Single column */
+    grid-template-columns: auto 1fr; /* Sidebar takes up its content width */
     height: 100vh; /* Full viewport height */
 }
 
@@ -27,7 +26,8 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0px 90px; /* Remove margin */
+    margin: 0px 80px; /* Adjust margin */
+    white-space: nowrap; /* Prevent text from wrapping */
 }
 
 
@@ -37,6 +37,7 @@ h1{
 }
 
 
+/* Sidebar styles */
 /* Sidebar styles */
 .sidebar {
     grid-area: sidebar;
@@ -52,16 +53,19 @@ h1{
 }
 
 /* Main content styles */
+/* Main content styles */
 .mainBody {
     grid-area: main;
     border: 2px solid black; /* Add border around the main body */
     padding: 0px 10px; /* Add padding inside the border */
+    margin-top: 20px;
+    margin-left: 10px;
 }
 
 .results {
-    border: 2px solid black; /* Add border around the main body */
+    border: 2px solid black; /* Add border around the results */
     padding: 0px 10px; /* Add padding inside the border */
-    margin-bottom: 20px;
+    height: 80%;
 }
 
 /* Footer styles */
