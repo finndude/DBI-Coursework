@@ -1,59 +1,78 @@
+<!------------------------------------------------------------------------->
+
 <!DOCTYPE html>
 <html lang="en">
+
+<!------------------------------------------------------------------------->
 
     <head>
         <title>Add A Vehicle</title>
         <meta charset="utf-8" />
 
-        <link rel="stylesheet" href="addVehicle.css">
+        <link rel="stylesheet" href="../CSS/mainCSS.css">
         <script src="addVehicle.js"></script>
     </head>
 
-    <body>
+<!------------------------------------------------------------------------->
+
+    <body class="gridContainer">
+
         <header class="mainHeader">
 
-            <h1><strong>Add A Vehicle</strong></h1>
+            <h1><strong>People Search</strong></h1>
 
             <nav>
                 <ul>
-                    <li><a href="#">People Search</a></li>
-                    <li><a href="#">Vehicle Search</a></li>
-                    <li><a href="#">Add A Vehicle</a></li>
+                    <li><a href="../People-Search/peopleSearch.html">People search</a></li>
+                    <li><a href="../Vehicle-Search/vehicleSearch.html">Vehicle Search</a></li>
+                    <li>Add A Vehicle</li>
                 </ul>
             </nav>
             
         </header>
 
+<!------------------------------------------------------------------------->
 
+       
+        <aside class="sidebar">
 
-        <div class="sidebar">
+            <img src="../Assets/van.gif" alt="Image of a Van">
 
-            <!-- Sidebar content here -->
+        </aside>
 
-        </div>
+<!------------------------------------>
 
+        <main class="mainBody">
 
-        <div class="mainBody">
-
-            <!-- Main body content here -->
+            <p>Enter the new registration number: <input type="text" id="regNum"></p>
+            <p>Enter the new make: <input type="text" id="vehicleMake"></p>
+            <p>Enter the new model: <input type="text" id="vehicleModel"></p>
+            <p>Enter the new colour: <input type="text" id="vehicleColour"></p>
+            <p>Enter the new owner: <input type="text" id="vehicleOwner"></p>
             
-        </div>
 
+            <div class="results">
 
-        <footer class="mainFooter">
+                <p>Results</p>
+
+            </div>
+            
+        </main>            
+
+     
+
+<!------------------------------------------------------------------------->
+
+        <footer>
 
             <p>Finley Wallace - Wright COMP1004 DBI Coursework</p>
         
         </footer>
 
-
-
-
-
-
-
-
+<!------------------------------------------------------------------------->
 
     </body>
 
 </html>
+
+<!------------------------------------------------------------------------->
