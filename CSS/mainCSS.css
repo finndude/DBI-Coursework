@@ -80,6 +80,7 @@ nav ul li
     padding: 0px 10px; /* Add padding inside the border */
     flex: 1; /* Allow the results box to grow and fill the remaining space */
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 /*-----------------------------------------------------------------------------------------------*/
