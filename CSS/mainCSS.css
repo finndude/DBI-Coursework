@@ -10,7 +10,7 @@
         "footer footer";
     grid-template-rows: auto 1fr auto; /* Header, Main, Footer take up their content height */
     grid-template-columns: auto 1fr; /* Sidebar takes up its content width */
-    height: 100vh; /* Full viewport height */
+    height: 97vh; /* Full viewport height */
 }
 
 /*-----------------------------------------------------------------------------------------------*/
