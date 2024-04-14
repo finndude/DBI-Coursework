@@ -12,28 +12,42 @@ fetchData();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-document.getElementById("peopleSearchForm").addEventListener("submit", async (event) => {
+document.getElementById("peopleSearchForm").addEventListener("submit", async (event) => 
+{
     event.preventDefault();
     
+////////////////////////
+
     const driverName = document.getElementById("driverName").value;
     const licenseNumber = document.getElementById("licenseNumber").value;
     const results = document.querySelector(".results");
 
-    if (driverName.trim() === "" && licenseNumber.trim() === "") {
+/////////////////////////////////////////////////
+
+    if (driverName.trim() === "" && licenseNumber.trim() === "") 
+    {
         // Clear any existing content inside the .results div
         results.innerHTML = "";
+
+////////////////////////
 
         // Create a new heading element
         const resultsHeading = document.createElement("h2");
         resultsHeading.textContent = "Results";
 
+////////////////////////
+
         // Create a new paragraph element for the "Enter values" text
         const enterValuesText = document.createElement("p");
         enterValuesText.textContent = "Please enter what you would like to search for";
 
+////////////////////////
+
         // Append the resultsHeading and enterValuesText to the .results div
         results.appendChild(resultsHeading);
         results.appendChild(enterValuesText);
+
+////////////////////////
 
         // Reset the text content after 5 seconds
         setTimeout(() => {
@@ -44,5 +58,8 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         return;
     }
 
-    // Add code here to handle the case where one or both fields are not empty
+/////////////////////////////////////////////////
+
 });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
