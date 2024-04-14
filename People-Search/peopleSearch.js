@@ -77,6 +77,12 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         return;
     }
 
+    else if (driverName.trim() !== "" || licenseNumber.trim() !== "")
+    {
+        
+    }
+    
+
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
