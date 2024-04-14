@@ -22,10 +22,10 @@ document.getElementById('peopleSearchForm').addEventListener('submit', async (ev
     if (driverName.trim() === '' && licenseNumber.trim() === '') {
         results.textContent = 'Please enter values';
 
-        // Reset the text content after 5 seconds
+        // Reset the text content after 2.5 seconds
         setTimeout(() => {
             results.textContent = 'Results';
-        }, 5000);
+        }, 2500);
         
         return;
     }

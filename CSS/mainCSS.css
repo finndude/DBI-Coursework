@@ -78,9 +78,18 @@ nav ul li
 {
     border: 2px solid black; /* Add border around the results */
     padding: 0px 10px; /* Add padding inside the border */
-    flex: 1; /* Allow the results box to grow and fill the remaining space */
-    margin-bottom: 10px;
+    height: 80px; /* Fixed height */
+    overflow: auto; /* Add scrollbar when content overflows */
     margin-top: 10px;
+    margin-bottom: 10px;
+    height: 210px;
+}
+
+/*---------------------------------------------*/
+
+h2
+{
+    text-align: center;
 }
 
 /*-----------------------------------------------------------------------------------------------*/
