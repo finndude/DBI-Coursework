@@ -77,9 +77,33 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         return;
     }
 
-    else if (driverName.trim() !== "" || licenseNumber.trim() !== "")
+/////////////////////////////////////////////////
+
+    else if (driverName.trim() !== "")
     {
-        
+        console.log("Data from database:", data);
+
+        const searchResult = data.find(person => person.Name === driverName.trim());
+        console.log("Search result:", searchResult);
+    
+        if (searchResult) {
+            // If the name is found, display the entire row
+            const resultText = document.createElement("p");
+            resultText.textContent = `PersonID: ${searchResult.PersonID}, Name: ${searchResult.Name}, Address: ${searchResult.Address}, DOB: ${searchResult.DOB}, LicenseNumber: ${searchResult.LicenseNumber}`;
+            results.appendChild(resultText);
+        } else {
+            // If the name is not found, display a message
+            const notFoundText = document.createElement("p");
+            notFoundText.textContent = "Name not found";
+            results.appendChild(notFoundText);
+        }
+    }
+
+/////////////////////////////////////////////////
+
+    else if (licenseNumber.trim() !== "")
+    {
+
     }
     
 
