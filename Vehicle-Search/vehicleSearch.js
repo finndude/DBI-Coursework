@@ -19,12 +19,14 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
     const numberPlate = document.getElementById("numberPlate").value;
     const results = document.querySelector(".results");
 
+/////////////////////////////////////////////////
+
     if (numberPlate.trim() === "")
     {
         results.innerHTML = ""; // Clear any existing content inside the .results div
 
         const resultsHeading = document.createElement("h2"); // Create a new heading element
-        resultsHeading.textContent = "Results";
+        resultsHeading.textContent = "Search Results";
 
         
         const enterValuesText = document.createElement("p"); // Create a new paragraph element for the "Enter values" text
@@ -41,6 +43,8 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
         
         return;
     }
+
+/////////////////////////////////////////////////
 
     else if (numberPlate.trim() !== "")
     {

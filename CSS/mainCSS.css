@@ -74,15 +74,12 @@ nav ul li
 
 /*---------------------------------------------*/
 
-.results 
-{
+.results {
     border: 2px solid black; /* Add border around the results */
     padding: 0px 10px; /* Add padding inside the border */
-    height: 80px; /* Fixed height */
     overflow: auto; /* Add scrollbar when content overflows */
-    margin-top: 10px;
-    margin-bottom: 10px;
-    height: 210px;
+    margin: 10px 0; /* Adjust margin */
+    height: 100%; /* Take up the entire height of the mainBody */
 }
 
 /*---------------------------------------------*/
