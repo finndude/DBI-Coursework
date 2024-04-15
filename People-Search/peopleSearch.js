@@ -87,50 +87,83 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
 
     else if (driverName.trim() !== "")
     {
-        // Convert the input and the names in the database to lowercase for case-insensitive comparison
-        const searchTerm = driverName.toLowerCase();
+        const searchTerm = driverName.toLowerCase(); // Convert the input and the names in the database to lowercase for case-insensitive comparison
 
-        // Filter the fetched data based on the search term
-        const searchResults = fetchedData.filter(person => {
-            // Convert each person's name to lowercase for comparison
-            const fullName = `${person.Name}`.toLowerCase();
-            // Check if the search term is included in the person's name
-            return fullName.includes(searchTerm);
+
+        const searchResults = fetchedData.filter(person => // Filter the fetched data based on the search term
+        {
+            const fullName = `${person.Name}`.toLowerCase(); // Convert each person's name to lowercase for comparison
+            
+            return fullName.includes(searchTerm); // Check if the search term is included in the person's name
         });
 
-        // Clear any existing content inside the .results div
-        results.innerHTML = "";
 
-        // Create a new heading element for the search results
-        const resultsHeading = document.createElement("h2");
+        results.innerHTML = ""; // Clear any existing content inside the .results div
+
+        const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
         resultsHeading.textContent = "Search Results";
 
-        // Append the resultsHeading to the .results div
-        results.appendChild(resultsHeading);
+        results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
 
-        // Check if any results were found
-        if (searchResults.length === 0) {
+
+        if (searchResults.length === 0) // Check if any results were found
+        {
             const noResultsText = document.createElement("p");
             noResultsText.textContent = "No matching records found.";
             results.appendChild(noResultsText);
-        } else {
-            // Loop through each search result and display it
-            searchResults.forEach(person => {
+        } 
+        else 
+        {
+            searchResults.forEach(person => // Loop through each search result and display it
+            {
                 const personInfo = document.createElement("p");
-                personInfo.textContent = `Name: ${person.Name}, Address: ${person.Address}, DOB: ${person.DOB}, License Number: ${person.LicenseNumber}`;
+                personInfo.textContent = `Name: ${person.Name}, Address: ${person.Address}, DOB: ${person.DOB}, License Number: ${person.LicenseNumber}, Expiry Date: ${person.ExpiryDate}`;
+                personInfo.innerHTML = `<strong>Name: </strong>${person.Name}, <strong>Address: </strong>${person.Address}, <strong>DOB: </strong>${person.DOB}, <strong>License Number: </strong>${person.LicenseNumber}, <strong>Expiry Date: </strong>${person.ExpiryDate}`;
                 results.appendChild(personInfo);
             });
         }
     }
     
-
 /////////////////////////////////////////////////
 
     else if (licenseNumber.trim() !== "")
     {
+        const searchTerm = licenseNumber.toLowerCase(); // Convert the input and the license numbers in the database to lowercase for case-insensitive comparison
 
+
+        const searchResults = fetchedData.filter(person => // Filter the fetched data based on the search term
+        {
+            const personLicenseNumber = `${person.LicenseNumber}`.toLowerCase(); // Convert each person's license number to lowercase for comparison
+            
+            return personLicenseNumber.includes(searchTerm); // Check if the search term is included in the person's license number
+        });
+
+        
+        results.innerHTML = ""; // Clear any existing content inside the .results div
+
+        const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
+        resultsHeading.textContent = "Search Results";
+
+        results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
+
+        
+        if (searchResults.length === 0) // Check if any results were found
+        {
+            const noResultsText = document.createElement("p");
+            noResultsText.textContent = "No matching records found.";
+            results.appendChild(noResultsText);
+        } 
+        else 
+        {
+            searchResults.forEach(person => // Loop through each search result and display it
+            {
+                const personInfo = document.createElement("p");
+                personInfo.textContent = `Name: ${person.Name}, Address: ${person.Address}, DOB: ${person.DOB}, License Number: ${person.LicenseNumber}, Expiry Date: ${person.ExpiryDate}`;
+                personInfo.innerHTML = `<strong>Name: </strong>${person.Name}, <strong>Address: </strong>${person.Address}, <strong>DOB: </strong>${person.DOB}, <strong>License Number: </strong>${person.LicenseNumber}, <strong>Expiry Date: </strong>${person.ExpiryDate}`;
+                results.appendChild(personInfo);
+            });
+        }
     }
-    
-
 });
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
