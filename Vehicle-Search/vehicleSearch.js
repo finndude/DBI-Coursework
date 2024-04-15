@@ -12,30 +12,42 @@ fetchData();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-document.getElementById("vehicleSearchForm").addEventListener("submit", async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-
+document.getElementById("vehicleSearchForm").addEventListener("submit", async (event) => 
+{
+    event.preventDefault();
+    
     const numberPlate = document.getElementById("numberPlate").value;
     const results = document.querySelector(".results");
 
-    if (numberPlate.trim() === "") {
+    if (numberPlate.trim() === "")
+    {
         results.innerHTML = ""; // Clear any existing content inside the .results div
 
         const resultsHeading = document.createElement("h2"); // Create a new heading element
         resultsHeading.textContent = "Results";
 
+        
         const enterValuesText = document.createElement("p"); // Create a new paragraph element for the "Enter values" text
         enterValuesText.textContent = "Please enter the data you would like to search for";
 
         // Append the resultsHeading and enterValuesText to the .results div
         results.appendChild(resultsHeading);
         results.appendChild(enterValuesText);
-
-        return; // Exit the function
+        
+        setTimeout(() => // Reset the text content after 5 seconds
+        {
+            results.removeChild(enterValuesText); // Remove the enterValuesText
+        }, 2500);
+        
+        return;
     }
 
-    // Add code here to search for the number plate in the fetched data and display the results
-});
+    else if (numberPlate.trim() !== "")
+    {
+        
+    }
+    
 
+});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
