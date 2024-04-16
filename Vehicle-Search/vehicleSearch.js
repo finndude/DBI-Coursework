@@ -5,6 +5,8 @@ const supabase = createClient("https://adbhzvvfknicxaxnowok.supabase.co", "eyJhb
 let fetchedData; // Define a global variable to hold the fetched data
 let fetchedPeople; // Define a global variable to hold the fetched data
 
+/////////////////////////////////////////////////
+
 async function fetchData() 
 {
     const {data, error} = await supabase.from("Vehicles").select();
@@ -15,6 +17,7 @@ async function fetchData()
 
 fetchData();
 
+/////////////////////////////////////////////////
 
 async function fetchPeople() 
 {
@@ -48,8 +51,8 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
         const enterValuesText = document.createElement("p"); // Create a new paragraph element for the "Enter values" text
         enterValuesText.textContent = "Please enter the data you would like to search for";
 
-        // Append the resultsHeading and enterValuesText to the .results div
-        results.appendChild(resultsHeading);
+        
+        results.appendChild(resultsHeading); // Append the resultsHeading and enterValuesText to the .results div
         results.appendChild(enterValuesText);
         
         setTimeout(() => // Reset the text content after 5 seconds
@@ -82,6 +85,7 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
         resultsHeading.textContent = "Search Results";
         results.appendChild(resultsHeading);
 
+////////////////////////
         
         if (searchResults.length === 0) // Check if any results were found
         {
@@ -96,21 +100,21 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
                 const vehicleInfo = document.createElement("p");
                 vehicleInfo.textContent = `Number Plate: ${vehicle.VehicleID}, Make: ${vehicle.Make}, Model: ${vehicle.Model}, Colour: ${vehicle.Colour}`;
 
-                // Fetch owner details from the People table using OwnerID
-                const owner = fetchedPeople.find(person => person.PersonID === vehicle.OwnerID);
-                if (owner) {
-                    // If owner is found, display their name and license number
-                    vehicleInfo.textContent += `, Owner's Name: ${owner.Name}, License Number: ${owner.LicenseNumber}`;
-                } else {
-                    // If owner is not found, indicate that the owner is unknown
-                    vehicleInfo.textContent += `, Owner's Name: Unknown, License Number: Unknown`;
+                
+                const owner = fetchedPeople.find(person => person.PersonID === vehicle.OwnerID); // Fetch owner details from the People table using OwnerID
+                if (owner) 
+                {
+                    vehicleInfo.textContent += `, Owner's Name: ${owner.Name}, License Number: ${owner.LicenseNumber}`; // If owner is found, display their name and license number
+                } 
+                else 
+                {
+                    vehicleInfo.textContent += `, Owner's Name: Unknown, License Number: Unknown`; // If owner is not found, indicate that the owner is unknown
                 }
 
                 results.appendChild(vehicleInfo);
             });
         }
     }
-
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

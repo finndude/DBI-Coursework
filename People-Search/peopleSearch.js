@@ -105,6 +105,7 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
 
         results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
 
+////////////////////////
 
         if (searchResults.length === 0) // Check if any results were found
         {
@@ -146,6 +147,7 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
 
         results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
 
+////////////////////////
         
         if (searchResults.length === 0) // Check if any results were found
         {
