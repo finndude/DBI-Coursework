@@ -75,7 +75,7 @@ nav ul li
 /*---------------------------------------------*/
 
 .results {
-    border: 2px solid black; /* Add border around the results */
+    border: 2px dotted black; /* Add border around the results */
     padding: 0px 10px; /* Add padding inside the border */
     overflow: auto; /* Add scrollbar when content overflows */
     margin: 10px 0; /* Adjust margin */
