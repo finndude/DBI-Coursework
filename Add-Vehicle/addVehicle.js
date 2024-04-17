@@ -48,46 +48,61 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
 /////////////////////////////////////////////////
 
-    else if (regNum.trim() !== "" && vehicleMake.trim() !== "" && vehicleModel.trim() !== "" && vehicleColour.trim() !== "" && vehicleOwner.trim() !== "") {
+    else if (regNum.trim() !== "" && vehicleMake.trim() !== "" && vehicleModel.trim() !== "" && vehicleColour.trim() !== "" && vehicleOwner.trim() !== "") 
+    {
         try {
-            const {error} = await supabase.from("Vehicles")
-                .insert({VehicleID: regNum, Make: vehicleMake, Model: vehicleModel, Colour: vehicleColour});
+            // Check if the regNum already exists in the database
+            const { data: existingVehicles, error: fetchError } = await supabase
+                .from("Vehicles")
+                .select("VehicleID")
+                .eq("VehicleID", regNum);
 
-////////////////////////
-
-            if (error)
-            {
-                throw error;
+            if (fetchError) {
+                throw fetchError;
             }
 
+            // If the regNum exists, display an error message
+            if (existingVehicles && existingVehicles.length > 0) 
+            {
+                // Create a new paragraph element for the result
+                const resultText = document.createElement("p");
+                resultText.textContent = `Registration: ${regNum} is already in the database!`;
+
+                // Append the result below the existing results heading
+                results.appendChild(resultText);
+
+                // Set a timeout to remove the result after 2.5 seconds
+                setTimeout(() => {
+                    results.removeChild(resultText);
+                }, 2500);
+                
+                return;
+            }
+
+            // Insert the new vehicle if it doesn't exist already
+            const { error } = await supabase.from("Vehicles").insert({ VehicleID: regNum, Make: vehicleMake, Model: vehicleModel, Colour: vehicleColour });
+
+            if (error) {
+                throw error;
+            }
 
             // Create a new paragraph element for the result
             const resultText = document.createElement("p");
             resultText.textContent = `Successfully added vehicle registration number ${regNum}.`;
-    
 
             // Append the result below the existing results heading
             results.appendChild(resultText);
-    
 
             // Set a timeout to remove the result after 2.5 seconds
-            setTimeout(() => 
-            {
+            setTimeout(() => {
                 results.removeChild(resultText);
             }, 2500);
-        } 
-        
-////////////////////////
-
-        catch (error) 
-        {
+        } catch (error) {
             // Display error message if insertion fails
             const errorMessage = `Error adding vehicle registration number: ${error.message}`;
             console.error(errorMessage);
             alert(errorMessage); // Optionally display error message in an alert
         }
     }
-    
-        
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////
