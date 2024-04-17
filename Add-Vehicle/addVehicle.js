@@ -32,7 +32,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
         
         const enterValuesText = document.createElement("p"); // Create a new paragraph element for the "Enter values" text
-        enterValuesText.textContent = "Please enter the data you would like to search for";
+        enterValuesText.textContent = "Please enter the data you would like to add";
 
         // Append the resultsHeading and enterValuesText to the .results div
         results.appendChild(resultsHeading);
@@ -48,9 +48,24 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
     else if (regNum.trim() !== "" && vehicleMake.trim() !== "" && vehicleModel.trim() !== "" && vehicleColour.trim() !== "" && vehicleOwner.trim() !== "")
     {
+        try
+        {
+            const { error } = await supabase.from("Vehicles")
+                .insert({ VehicleID: regNum });
+        
+            if (error) 
+            {
+                throw error;
+            }
+        
+            results.textContent = `Successfully added vehicle registration number ${regNum}.`;
+        } 
+        catch (error) 
+        {
+            results.textContent = `Error adding vehicle registration number: ${error.message}`;
+        }
         
     }
-
+        
 });
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
