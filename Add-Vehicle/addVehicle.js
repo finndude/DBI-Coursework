@@ -46,26 +46,48 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
         return;
     }
 
-    else if (regNum.trim() !== "" && vehicleMake.trim() !== "" && vehicleModel.trim() !== "" && vehicleColour.trim() !== "" && vehicleOwner.trim() !== "")
-    {
-        try
-        {
-            const { error } = await supabase.from("Vehicles")
-                .insert({ VehicleID: regNum });
-        
-            if (error) 
+/////////////////////////////////////////////////
+
+    else if (regNum.trim() !== "" && vehicleMake.trim() !== "" && vehicleModel.trim() !== "" && vehicleColour.trim() !== "" && vehicleOwner.trim() !== "") {
+        try {
+            const {error} = await supabase.from("Vehicles")
+                .insert({VehicleID: regNum, Make: vehicleMake, Model: vehicleModel, Colour: vehicleColour});
+
+////////////////////////
+
+            if (error)
             {
                 throw error;
             }
-        
-            results.textContent = `Successfully added vehicle registration number ${regNum}.`;
+
+
+            // Create a new paragraph element for the result
+            const resultText = document.createElement("p");
+            resultText.textContent = `Successfully added vehicle registration number ${regNum}.`;
+    
+
+            // Append the result below the existing results heading
+            results.appendChild(resultText);
+    
+
+            // Set a timeout to remove the result after 2.5 seconds
+            setTimeout(() => 
+            {
+                results.removeChild(resultText);
+            }, 2500);
         } 
+        
+////////////////////////
+
         catch (error) 
         {
-            results.textContent = `Error adding vehicle registration number: ${error.message}`;
+            // Display error message if insertion fails
+            const errorMessage = `Error adding vehicle registration number: ${error.message}`;
+            console.error(errorMessage);
+            alert(errorMessage); // Optionally display error message in an alert
         }
-        
     }
+    
         
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////
