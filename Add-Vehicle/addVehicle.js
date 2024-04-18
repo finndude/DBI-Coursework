@@ -121,7 +121,8 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                 ownerId = existingOwner[0].PersonID;
             } 
             
-            else {
+            else 
+            {
                 // If the owner doesn't exist, prompt for license number
                 const licenseDiv = document.createElement("div");
                 licenseDiv.classList.add("licenseDiv");
@@ -136,13 +137,15 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                     const licenseNum = document.getElementById("licenseNum").value;
                     if (licenseNum.trim() !== "") {
                         try {
+                            // Generate a random PersonID
+                            const personID = Math.floor(Math.random() * 1000000);
                             const { data: newOwner, error: insertError } = await supabase
                                 .from("People")
-                                .insert([{ Name: vehicleOwner, LicenseNumber: licenseNum }]);
+                                .insert([{ PersonID: personID, Name: vehicleOwner, LicenseNumber: licenseNum }]);
                             if (insertError) {
                                 throw insertError;
                             }
-                            ownerId = newOwner[0].PersonID;
+                            ownerId = personID;
                             // Insert the new vehicle with the owner's PersonID
                             const { error } = await supabase.from("Vehicles").insert({
                                 VehicleID: regNum,
