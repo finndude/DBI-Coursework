@@ -55,8 +55,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
         const enterValuesText = document.createElement("p"); // Create a new paragraph element for the "Enter values" text
         enterValuesText.textContent = "Please enter the data you would like to add";
 
-        // Append the resultsHeading and enterValuesText to the .results div
-        results.appendChild(resultsHeading);
+        results.appendChild(resultsHeading); // Append the resultsHeading and enterValuesText to the .results div
         results.appendChild(enterValuesText);
         
         setTimeout(() => // Reset the text content after 5 seconds
@@ -73,8 +72,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
     {
         try 
         {
-            // Check if the regNum already exists in the database
-            const { data: existingVehicles, error: fetchError } = await supabase
+            const { data: existingVehicles, error: fetchError } = await supabase // Check if the regNum already exists in the database
                 .from("Vehicles")
                 .select("VehicleID")
                 .eq("VehicleID", regNum);
@@ -84,18 +82,14 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                 throw fetchError;
             }
 
-            // If the regNum exists, display an error message
-            if (existingVehicles && existingVehicles.length > 0) 
+            if (existingVehicles && existingVehicles.length > 0) // If the regNum exists, display an error message
             {
-                // Create a new paragraph element for the result
-                const resultText = document.createElement("p");
+                const resultText = document.createElement("p"); // Create a new paragraph element for the result
                 resultText.textContent = `Registration: ${regNum} is already in the database!`;
 
-                // Append the result below the existing results heading
-                results.appendChild(resultText);
+                results.appendChild(resultText); // Append the result below the existing results heading
 
-                // Set a timeout to remove the result after 2.5 seconds
-                setTimeout(() => 
+                setTimeout(() => // Set a timeout to remove the result after 2.5 seconds
                 {
                     results.removeChild(resultText);
                 }, 2500);
@@ -105,8 +99,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
             let ownerId;
 
-            // Check if the owner already exists
-            const { data: existingOwner, error: ownerError } = await supabase
+            const { data: existingOwner, error: ownerError } = await supabase // Check if the owner already exists
                 .from("People")
                 .select("PersonID")
                 .eq("Name", vehicleOwner);
@@ -116,44 +109,51 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                 throw ownerError;
             }
 
-            // If the owner exists, use their PersonID
-            if (existingOwner && existingOwner.length > 0) 
+            if (existingOwner && existingOwner.length > 0) // If the owner exists, use their PersonID
             {
                 ownerId = existingOwner[0].PersonID;
             } 
             
-            else {
+            else 
+            {
                 // If the owner doesn't exist, prompt for license number
                 const licenseDiv = document.createElement("div");
                 licenseDiv.classList.add("licenseDiv");
+
                 const licenseLabel = document.createElement("label");
                 licenseLabel.textContent = "Enter the license number: ";
+
                 const licenseInput = document.createElement("input");
                 licenseInput.type = "text";
                 licenseInput.id = "licenseNum";
+
                 const submitLicenseBtn = document.createElement("button");
                 submitLicenseBtn.textContent = "Submit";
-                submitLicenseBtn.addEventListener("click", async () => {
+                submitLicenseBtn.addEventListener("click", async () => 
+                {
                     const licenseNum = document.getElementById("licenseNum").value;
-                    if (licenseNum.trim() !== "") {
-                        try {
 
-                            // Loop through fetchedPeople to find the maximum PersonID
-                            fetchedPeople.forEach(person => {
-                                if (person.PersonID > maxPersonID) {
+                    if (licenseNum.trim() !== "") 
+                    {
+                        try 
+                        {
+                            fetchedPeople.forEach(person => // Loop through fetchedPeople to find the maximum PersonID
+                            {
+                                if (person.PersonID > maxPersonID) 
+                                {
                                     maxPersonID = person.PersonID;
                                 }
                             });
 
-                            // Increment maxPersonID by 1 to get the newPersonID
-                            const newPersonID = maxPersonID + 1;
+                            const newPersonID = maxPersonID + 1; // Increment maxPersonID by 1 to get the newPersonID
 
                             // Insert the new person with the provided license number
-                            const { data: newOwner, error: insertError } = await supabase
+                            const { data: newOwner, error: insertError } = await supabase 
                                 .from("People")
                                 .insert([{ PersonID: newPersonID, Name: vehicleOwner, LicenseNumber: licenseNum }]);
 
-                            if (insertError) {
+                            if (insertError) 
+                            {
                                 throw insertError;
                             }
 
@@ -168,19 +168,24 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                                 OwnerID: ownerId
                             });
 
-                            if (error) {
+                            if (error) 
+                            {
                                 throw error;
                             }
 
                             const resultText = document.createElement("p");
-                            resultText.textContent = `Successfully added vehicle registration number ${regNum}.`;
+                            resultText.textContent = `Successfully added vehicle registration number ${regNum}`;
                             results.appendChild(resultText);
-                            setTimeout(() => {
+                            
+                            setTimeout(() => 
+                            {
                                 results.removeChild(resultText);
-                                // Remove the license entry box, text, and button
-                                licenseDiv.remove();
+                                licenseDiv.remove(); // Remove the license entry box, text, and button
                             }, 2500);
-                        } catch (error) {
+                        } 
+                        
+                        catch (error) 
+                        {
                             const errorMessage = `Error adding vehicle registration number: ${error.message}`;
                             console.error(errorMessage);
                             alert(errorMessage);
@@ -189,47 +194,45 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                         maxPersonID = maxPersonID + 1;
                     }
                 });
+
                 licenseDiv.appendChild(licenseLabel);
                 licenseDiv.appendChild(licenseInput);
 
-                // Add space between the input box and the submit button
-                licenseDiv.appendChild(document.createTextNode(" ")); // Add a space
+                
+                licenseDiv.appendChild(document.createTextNode(" ")); //Add space between the input box and the submit button
 
                 licenseDiv.appendChild(submitLicenseBtn);
                 results.appendChild(licenseDiv);
+                
                 return;
             }
 
-
-            // Insert the new vehicle with the owner's PersonID
-            const { error } = await supabase.from("Vehicles").insert({ VehicleID: regNum, Make: vehicleMake, Model: vehicleModel, Colour: vehicleColour, OwnerID: ownerId });
+            const { error } = await supabase.from("Vehicles").insert({ VehicleID: regNum, Make: vehicleMake, Model: vehicleModel, Colour: vehicleColour, OwnerID: ownerId }); // Insert the new vehicle with the owner's PersonID
 
             if (error) 
             {
                 throw error;
             }
 
-            // Create a new paragraph element for the result
-            const resultText = document.createElement("p");
+            const resultText = document.createElement("p"); // Create a new paragraph element for the result
             resultText.textContent = `Successfully added vehicle with registration number: ${regNum}`;;
 
-            // Append the result below the existing results heading
-            results.appendChild(resultText);
+            results.appendChild(resultText); // Append the result below the existing results heading
 
-            // Set a timeout to remove the result after 2.5 seconds
-            setTimeout(() => 
+            setTimeout(() => // Set a timeout to remove the result after 2.5 seconds
             {
                 results.removeChild(resultText);
             }, 2500);
 
         } 
+        
         catch (error) 
         {
-            // Display error message if insertion fails
-            const errorMessage = `Error adding vehicle registration number: ${error.message}`;
+            const errorMessage = `Error adding vehicle registration number: ${error.message}`; // Display error message if insertion fails
             console.error(errorMessage);
             alert(errorMessage); // Optionally display error message in an alert
         }
     }
 });
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
