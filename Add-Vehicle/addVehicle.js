@@ -4,6 +4,7 @@ const supabase = createClient("https://adbhzvvfknicxaxnowok.supabase.co", "eyJhb
 
 let fetchedVehicles; // Define a global variable to hold the fetched data
 let fetchedPeople; // Define a global variable to hold the fetched data
+let maxPersonID = 0;
 
 /////////////////////////////////////////////////
 
@@ -121,8 +122,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                 ownerId = existingOwner[0].PersonID;
             } 
             
-            else 
-            {
+            else {
                 // If the owner doesn't exist, prompt for license number
                 const licenseDiv = document.createElement("div");
                 licenseDiv.classList.add("licenseDiv");
@@ -137,15 +137,28 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                     const licenseNum = document.getElementById("licenseNum").value;
                     if (licenseNum.trim() !== "") {
                         try {
-                            // Generate a random PersonID
-                            const personID = Math.floor(Math.random() * 1000000);
+
+                            // Loop through fetchedPeople to find the maximum PersonID
+                            fetchedPeople.forEach(person => {
+                                if (person.PersonID > maxPersonID) {
+                                    maxPersonID = person.PersonID;
+                                }
+                            });
+
+                            // Increment maxPersonID by 1 to get the newPersonID
+                            const newPersonID = maxPersonID + 1;
+
+                            // Insert the new person with the provided license number
                             const { data: newOwner, error: insertError } = await supabase
                                 .from("People")
-                                .insert([{ PersonID: personID, Name: vehicleOwner, LicenseNumber: licenseNum }]);
+                                .insert([{ PersonID: newPersonID, Name: vehicleOwner, LicenseNumber: licenseNum }]);
+
                             if (insertError) {
                                 throw insertError;
                             }
-                            ownerId = personID;
+
+                            ownerId = newPersonID;
+
                             // Insert the new vehicle with the owner's PersonID
                             const { error } = await supabase.from("Vehicles").insert({
                                 VehicleID: regNum,
@@ -154,9 +167,11 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                                 Colour: vehicleColour,
                                 OwnerID: ownerId
                             });
+
                             if (error) {
                                 throw error;
                             }
+
                             const resultText = document.createElement("p");
                             resultText.textContent = `Successfully added vehicle registration number ${regNum}.`;
                             results.appendChild(resultText);
@@ -170,6 +185,8 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                             console.error(errorMessage);
                             alert(errorMessage);
                         }
+
+                        maxPersonID = maxPersonID + 1;
                     }
                 });
                 licenseDiv.appendChild(licenseLabel);
