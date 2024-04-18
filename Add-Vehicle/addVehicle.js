@@ -158,10 +158,12 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                                 throw error;
                             }
                             const resultText = document.createElement("p");
-                            resultText.textContent = `Successfully added vehicle with registration number: ${regNum}`;
+                            resultText.textContent = `Successfully added vehicle registration number ${regNum}.`;
                             results.appendChild(resultText);
                             setTimeout(() => {
                                 results.removeChild(resultText);
+                                // Remove the license entry box, text, and button
+                                licenseDiv.remove();
                             }, 2500);
                         } catch (error) {
                             const errorMessage = `Error adding vehicle registration number: ${error.message}`;
