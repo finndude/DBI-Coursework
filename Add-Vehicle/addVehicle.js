@@ -77,10 +77,14 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                 .select("VehicleID")
                 .eq("VehicleID", regNum);
 
+////////////////////////
+
             if (fetchError) 
             {
                 throw fetchError;
             }
+
+////////////////////////
 
             if (existingVehicles && existingVehicles.length > 0) // If the regNum exists, display an error message
             {
@@ -97,23 +101,31 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                 return;
             }
 
-            let ownerId;
-
+////////////////////////
+        
             const { data: existingOwner, error: ownerError } = await supabase // Check if the owner already exists
                 .from("People")
                 .select("PersonID")
                 .eq("Name", vehicleOwner);
+
+////////////////////////
 
             if (ownerError) 
             {
                 throw ownerError;
             }
 
+////////////////////////
+
+            let ownerId;
+
             if (existingOwner && existingOwner.length > 0) // If the owner exists, use their PersonID
             {
                 ownerId = existingOwner[0].PersonID;
             } 
-            
+           
+////////////////////////
+
             else 
             {
                 // If the owner doesn't exist, prompt for license number
@@ -207,12 +219,16 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                 return;
             }
 
+////////////////////////
+
             const { error } = await supabase.from("Vehicles").insert({ VehicleID: regNum, Make: vehicleMake, Model: vehicleModel, Colour: vehicleColour, OwnerID: ownerId }); // Insert the new vehicle with the owner's PersonID
 
             if (error) 
             {
                 throw error;
             }
+
+////////////////////////
 
             const resultText = document.createElement("p"); // Create a new paragraph element for the result
             resultText.textContent = `Successfully added vehicle with registration number: ${regNum}`;;
@@ -226,6 +242,8 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
         } 
         
+////////////////////////
+
         catch (error) 
         {
             const errorMessage = `Error adding vehicle registration number: ${error.message}`; // Display error message if insertion fails
