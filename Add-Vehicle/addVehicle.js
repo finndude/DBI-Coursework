@@ -2,13 +2,33 @@ import {createClient} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+
 
 const supabase = createClient("https://adbhzvvfknicxaxnowok.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFkYmh6dnZma25pY3hheG5vd29rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI3NjYyMTgsImV4cCI6MjAyODM0MjIxOH0.spZ9Df831dq8DIglVvdsbnn6ygk2YL1q7ecG8MvH_zw")
 
-async function fetchData() 
+let fetchedVehicles; // Define a global variable to hold the fetched data
+let fetchedPeople; // Define a global variable to hold the fetched data
+
+/////////////////////////////////////////////////
+
+async function fetchVehicles() 
 {
     const {data, error} = await supabase.from("Vehicles").select();
-    console.log("Fetched data:", data);
+    console.log("Fetched Vehicles:", data);
+
+    fetchedVehicles = data;
 }
 
-fetchData();
+fetchVehicles();
+
+/////////////////////////////////////////////////
+
+async function fetchPeople() 
+{
+    const {data, error} = await supabase.from("People").select();
+    console.log("Fetched People:", data);
+
+    fetchedPeople = data;
+}
+
+fetchPeople();
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -50,7 +70,8 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
     else if (regNum.trim() !== "" && vehicleMake.trim() !== "" && vehicleModel.trim() !== "" && vehicleColour.trim() !== "" && vehicleOwner.trim() !== "") 
     {
-        try {
+        try 
+        {
             // Check if the regNum already exists in the database
             const { data: existingVehicles, error: fetchError } = await supabase
                 .from("Vehicles")
