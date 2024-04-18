@@ -70,8 +70,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
     else if (regNum.trim() !== "" && vehicleMake.trim() !== "" && vehicleModel.trim() !== "" && vehicleColour.trim() !== "" && vehicleOwner.trim() !== "") 
     {
-        try 
-        {
+        try {
             // Check if the regNum already exists in the database
             const { data: existingVehicles, error: fetchError } = await supabase
                 .from("Vehicles")
@@ -83,8 +82,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
             }
 
             // If the regNum exists, display an error message
-            if (existingVehicles && existingVehicles.length > 0) 
-            {
+            if (existingVehicles && existingVehicles.length > 0) {
                 // Create a new paragraph element for the result
                 const resultText = document.createElement("p");
                 resultText.textContent = `Registration: ${regNum} is already in the database!`;
@@ -96,12 +94,40 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                 setTimeout(() => {
                     results.removeChild(resultText);
                 }, 2500);
-                
+
                 return;
             }
 
-            // Insert the new vehicle if it doesn't exist already
-            const { error } = await supabase.from("Vehicles").insert({ VehicleID: regNum, Make: vehicleMake, Model: vehicleModel, Colour: vehicleColour });
+            let ownerId;
+
+            // Check if the owner already exists
+            const { data: existingOwner, error: ownerError } = await supabase
+                .from("People")
+                .select("PersonID")
+                .eq("Name", vehicleOwner);
+
+            if (ownerError) {
+                throw ownerError;
+            }
+
+            // If the owner exists, use their PersonID
+            if (existingOwner && existingOwner.length > 0) {
+                ownerId = existingOwner[0].PersonID;
+            } else {
+                // If the owner doesn't exist, insert them into the People table and retrieve their PersonID
+                const { data: newOwner, error: insertError } = await supabase
+                    .from("People")
+                    .insert([{ Name: vehicleOwner }]);
+
+                if (insertError) {
+                    throw insertError;
+                }
+
+                ownerId = newOwner[0].PersonID;
+            }
+
+            // Insert the new vehicle with the owner's PersonID
+            const { error } = await supabase.from("Vehicles").insert({ VehicleID: regNum, Make: vehicleMake, Model: vehicleModel, Colour: vehicleColour, OwnerID: ownerId });
 
             if (error) {
                 throw error;
