@@ -158,7 +158,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                                 throw error;
                             }
                             const resultText = document.createElement("p");
-                            resultText.textContent = `Successfully added vehicle registration number ${regNum}.`;
+                            resultText.textContent = `Successfully added vehicle with registration number: ${regNum}`;
                             results.appendChild(resultText);
                             setTimeout(() => {
                                 results.removeChild(resultText);
@@ -192,7 +192,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
             // Create a new paragraph element for the result
             const resultText = document.createElement("p");
-            resultText.textContent = `Successfully added vehicle registration number ${regNum}.`;
+            resultText.textContent = `Successfully added vehicle with registration number: ${regNum}`;;
 
             // Append the result below the existing results heading
             results.appendChild(resultText);
