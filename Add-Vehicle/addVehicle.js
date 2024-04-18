@@ -70,19 +70,22 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
     else if (regNum.trim() !== "" && vehicleMake.trim() !== "" && vehicleModel.trim() !== "" && vehicleColour.trim() !== "" && vehicleOwner.trim() !== "") 
     {
-        try {
+        try 
+        {
             // Check if the regNum already exists in the database
             const { data: existingVehicles, error: fetchError } = await supabase
                 .from("Vehicles")
                 .select("VehicleID")
                 .eq("VehicleID", regNum);
 
-            if (fetchError) {
+            if (fetchError) 
+            {
                 throw fetchError;
             }
 
             // If the regNum exists, display an error message
-            if (existingVehicles && existingVehicles.length > 0) {
+            if (existingVehicles && existingVehicles.length > 0) 
+            {
                 // Create a new paragraph element for the result
                 const resultText = document.createElement("p");
                 resultText.textContent = `Registration: ${regNum} is already in the database!`;
@@ -91,7 +94,8 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                 results.appendChild(resultText);
 
                 // Set a timeout to remove the result after 2.5 seconds
-                setTimeout(() => {
+                setTimeout(() => 
+                {
                     results.removeChild(resultText);
                 }, 2500);
 
@@ -106,30 +110,80 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                 .select("PersonID")
                 .eq("Name", vehicleOwner);
 
-            if (ownerError) {
+            if (ownerError) 
+            {
                 throw ownerError;
             }
 
             // If the owner exists, use their PersonID
-            if (existingOwner && existingOwner.length > 0) {
+            if (existingOwner && existingOwner.length > 0) 
+            {
                 ownerId = existingOwner[0].PersonID;
-            } else {
-                // If the owner doesn't exist, insert them into the People table and retrieve their PersonID
-                const { data: newOwner, error: insertError } = await supabase
-                    .from("People")
-                    .insert([{ Name: vehicleOwner }]);
+            } 
+            
+            else {
+                // If the owner doesn't exist, prompt for license number
+                const licenseDiv = document.createElement("div");
+                licenseDiv.classList.add("licenseDiv");
+                const licenseLabel = document.createElement("label");
+                licenseLabel.textContent = "Enter the license number: ";
+                const licenseInput = document.createElement("input");
+                licenseInput.type = "text";
+                licenseInput.id = "licenseNum";
+                const submitLicenseBtn = document.createElement("button");
+                submitLicenseBtn.textContent = "Submit";
+                submitLicenseBtn.addEventListener("click", async () => {
+                    const licenseNum = document.getElementById("licenseNum").value;
+                    if (licenseNum.trim() !== "") {
+                        try {
+                            const { data: newOwner, error: insertError } = await supabase
+                                .from("People")
+                                .insert([{ Name: vehicleOwner, LicenseNumber: licenseNum }]);
+                            if (insertError) {
+                                throw insertError;
+                            }
+                            ownerId = newOwner[0].PersonID;
+                            // Insert the new vehicle with the owner's PersonID
+                            const { error } = await supabase.from("Vehicles").insert({
+                                VehicleID: regNum,
+                                Make: vehicleMake,
+                                Model: vehicleModel,
+                                Colour: vehicleColour,
+                                OwnerID: ownerId
+                            });
+                            if (error) {
+                                throw error;
+                            }
+                            const resultText = document.createElement("p");
+                            resultText.textContent = `Successfully added vehicle registration number ${regNum}.`;
+                            results.appendChild(resultText);
+                            setTimeout(() => {
+                                results.removeChild(resultText);
+                            }, 2500);
+                        } catch (error) {
+                            const errorMessage = `Error adding vehicle registration number: ${error.message}`;
+                            console.error(errorMessage);
+                            alert(errorMessage);
+                        }
+                    }
+                });
+                licenseDiv.appendChild(licenseLabel);
+                licenseDiv.appendChild(licenseInput);
 
-                if (insertError) {
-                    throw insertError;
-                }
+                // Add space between the input box and the submit button
+                licenseDiv.appendChild(document.createTextNode(" ")); // Add a space
 
-                ownerId = newOwner[0].PersonID;
+                licenseDiv.appendChild(submitLicenseBtn);
+                results.appendChild(licenseDiv);
+                return;
             }
+
 
             // Insert the new vehicle with the owner's PersonID
             const { error } = await supabase.from("Vehicles").insert({ VehicleID: regNum, Make: vehicleMake, Model: vehicleModel, Colour: vehicleColour, OwnerID: ownerId });
 
-            if (error) {
+            if (error) 
+            {
                 throw error;
             }
 
@@ -141,10 +195,14 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
             results.appendChild(resultText);
 
             // Set a timeout to remove the result after 2.5 seconds
-            setTimeout(() => {
+            setTimeout(() => 
+            {
                 results.removeChild(resultText);
             }, 2500);
-        } catch (error) {
+
+        } 
+        catch (error) 
+        {
             // Display error message if insertion fails
             const errorMessage = `Error adding vehicle registration number: ${error.message}`;
             console.error(errorMessage);
