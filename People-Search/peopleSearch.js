@@ -16,35 +16,35 @@ fetchData();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-document.getElementById("driverName").addEventListener("input", () => 
+document.getElementById("name").addEventListener("input", () => 
 {
-    const driverNameInput = document.getElementById("driverName");
-    const licenseNumberInput = document.getElementById("licenseNumber");
+    const nameInput = document.getElementById("name");
+    const licenseInput = document.getElementById("license");
     
-    if (driverNameInput.value.trim() !== '') // Check if the driver name input field is not empty
+    if (nameInput.value.trim() !== '') // Check if the driver name input field is not empty
     {
-        licenseNumberInput.disabled = true; // Disable the license number input field
+        licenseInput.disabled = true; // Disable the license number input field
     } 
     else 
     {
-        licenseNumberInput.disabled = false; // Enable the license number input field
+        licenseInput.disabled = false; // Enable the license number input field
     }
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-document.getElementById("licenseNumber").addEventListener("input", () => 
+document.getElementById("license").addEventListener("input", () => 
 {
-    const driverNameInput = document.getElementById("driverName");
-    const licenseNumberInput = document.getElementById("licenseNumber");
+    const nameInput = document.getElementById("name");
+    const licenseInput = document.getElementById("license");
     
-    if (licenseNumberInput.value.trim() !== "") // Check if the license number input field is not empty
+    if (licenseInput.value.trim() !== "") // Check if the license number input field is not empty
     {
-        driverNameInput.disabled = true; // Disable the driver name input field
+        nameInput.disabled = true; // Disable the driver name input field
     } 
     else 
     {
-        driverNameInput.disabled = false; // Enable the driver name input field
+        nameInput.disabled = false; // Enable the driver name input field
     }
 });
 
@@ -54,13 +54,13 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
 {
     event.preventDefault();
     
-    const driverName = document.getElementById("driverName").value;
-    const licenseNumber = document.getElementById("licenseNumber").value;
+    const name = document.getElementById("name").value;
+    const license = document.getElementById("license").value;
     const results = document.querySelector(".results");
 
 /////////////////////////////////////////////////
 
-    if (driverName.trim() === "" && licenseNumber.trim() === "") 
+    if (name.trim() === "" && license.trim() === "") 
     {
         results.innerHTML = ""; // Clear any existing content inside the .results div
 
@@ -85,9 +85,9 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
 
 /////////////////////////////////////////////////
 
-    else if (driverName.trim() !== "")
+    else if (name.trim() !== "")
     {
-        const searchTerm = driverName.toLowerCase(); // Convert the input and the names in the database to lowercase for case-insensitive comparison
+        const searchTerm = name.toLowerCase(); // Convert the input and the names in the database to lowercase for case-insensitive comparison
 
 
         const searchResults = fetchedData.filter(person => // Filter the fetched data based on the search term
@@ -127,9 +127,9 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
     
 /////////////////////////////////////////////////
 
-    else if (licenseNumber.trim() !== "")
+    else if (license.trim() !== "")
     {
-        const searchTerm = licenseNumber.toLowerCase(); // Convert the input and the license numbers in the database to lowercase for case-insensitive comparison
+        const searchTerm = license.toLowerCase(); // Convert the input and the license numbers in the database to lowercase for case-insensitive comparison
 
 
         const searchResults = fetchedData.filter(person => // Filter the fetched data based on the search term

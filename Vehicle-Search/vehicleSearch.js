@@ -35,12 +35,12 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
 {
     event.preventDefault();
     
-    const numberPlate = document.getElementById("numberPlate").value;
+    const rego = document.getElementById("rego").value;
     const results = document.querySelector(".results");
 
 /////////////////////////////////////////////////
 
-    if (numberPlate.trim() === "")
+    if (rego.trim() === "")
     {
         results.innerHTML = ""; // Clear any existing content inside the .results div
 
@@ -65,9 +65,9 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
 
 /////////////////////////////////////////////////
 
-    else if (numberPlate.trim() !== "") 
+    else if (rego.trim() !== "") 
     {
-        const searchTerm = numberPlate.toLowerCase(); // Convert the input to lowercase for case-insensitive comparison
+        const searchTerm = rego.toLowerCase(); // Convert the input to lowercase for case-insensitive comparison
 
         
         const searchResults = fetchedData.filter(vehicle => // Filter the fetched data based on the search term
