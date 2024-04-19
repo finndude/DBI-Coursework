@@ -189,7 +189,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 ///////// 
 
                 const submitPersonDetails = document.createElement("button");
-                submitPersonDetails.textContent = "Add Owner";
+                submitPersonDetails.textContent = "Add owner";
                 submitPersonDetails.addEventListener("click", async () => 
                 {
                     const personid = document.getElementById("personid").value;
