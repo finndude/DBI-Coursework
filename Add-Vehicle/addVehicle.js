@@ -44,6 +44,8 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
     const owner = document.getElementById("owner").value;
     const results = document.querySelector(".results");
 
+/////////////////////////////////////////////////
+
     if (rego.trim() === "" || make.trim() === "" || model.trim() === "" || colour.trim() === "" || owner.trim() === "") 
     {
         results.innerHTML = ""; // Clear any existing content inside the .results div
@@ -291,8 +293,6 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                 personForm.appendChild(submitPersonDetails);
                 results.appendChild(personForm);
 
-                
-                
                 return;
             }
 
