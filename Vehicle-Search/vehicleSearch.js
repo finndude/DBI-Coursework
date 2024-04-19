@@ -108,7 +108,7 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
                 } 
                 else 
                 {
-                    vehicleInfo.textContent += `, <strong>Owner's Name: </strong>Unknown, <strong>License Number: </strong>Unknown`; // If owner is not found, indicate that the owner is unknown
+                    vehicleInfo.innerHTML += `, <strong>Owner's Name: </strong>Unknown, <strong>License Number: </strong>Unknown`; // If owner is not found, indicate that the owner is unknown
                 }
 
                 results.appendChild(vehicleInfo);
