@@ -1,6 +1,6 @@
 /*-----------------------------------------------------------------------------------------------*/
 
-.gridContainer 
+.container 
 {
     display: grid;
     grid-template-areas:
@@ -15,12 +15,17 @@
 
 /*-----------------------------------------------------------------------------------------------*/
 
-.mainHeader 
+header 
 {
     grid-area: header;
     flex-direction: column; /* Stack items vertically */
-    border: 2px solid black; /* Add border around the header */
+    border: 1px solid black; /* Add border around the header */
     text-align: center;
+    padding: 10px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 /*---------------------------------------------*/
@@ -46,10 +51,13 @@ nav ul li
 .sidebar 
 {
     grid-area: sidebar;
-    border: 2px solid black; /* Add border around the sidebar */
+    border: 1px solid black; /* Add border around the sidebar */
     padding: 10px 10px;
     max-width: 190px; /* Set the maximum width of the sidebar */
     margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 /*---------------------------------------------*/
@@ -64,10 +72,12 @@ nav ul li
 .mainBody 
 {
     grid-area: main;
-    border: 2px solid black; /* Add border around the main body */
-    padding: 0px 10px; /* Add padding inside the border */
+    border: 1px solid black; /* Add border around the main body */
+    padding: 10px 10px; /* Add padding inside the border */
     margin-top: 10px;
+    margin-bottom: 10px;
     margin-left: 10px;
+    margin-right: 10px;
     display: flex; /* Use flexbox */
     flex-direction: column; /* Stack items vertically */
 }
@@ -94,10 +104,12 @@ h2
 footer 
 {
     grid-area: footer;
-    border: 2px solid black; /* Add border around the footer */
-    padding: 0px 10px;
-    margin-top: 10px; /* Add space between mainBody and footer */
-    
+    border: 1px solid black; /* Add border around the footer */
+    padding: 10px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 /*------------------------------------------------------------------------------------------------------*/
