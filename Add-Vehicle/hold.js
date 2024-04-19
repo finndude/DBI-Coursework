@@ -129,7 +129,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
             else 
             {
                 // If the owner doesn't exist, prompt for details
-                const personForm = document.createElement("div");
+                const personForm = document.createElement("form");
                 personForm.classList.add("personForm");
 
 /////////

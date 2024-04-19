@@ -9,7 +9,7 @@
         "footer footer";
     grid-template-rows: auto 1fr auto; /* Header, Main, Footer take up their content height */
     grid-template-columns: auto 4fr; /* Sidebar takes up one unit of width, main content takes up four units */
-    height: 97vh; /* Full viewport height */
+    height: 110vh; /* Full viewport height */
     background-color: lightblue; /* Set light blue background color */
 }
 
@@ -84,9 +84,10 @@ nav ul li
 
 /*---------------------------------------------*/
 
-.results {
+.results 
+{
     border: 2px dotted black; /* Add border around the results */
-    padding: 0px 10px; /* Add padding inside the border */
+    padding: 10px 10px; /* Add padding inside the border */
     overflow: auto; /* Add scrollbar when content overflows */
     margin: 10px 0; /* Adjust margin */
     height: 100%; /* Take up the entire height of the mainBody */
