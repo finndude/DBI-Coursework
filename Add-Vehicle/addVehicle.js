@@ -37,14 +37,14 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 {
     event.preventDefault();
     
-    const regNum = document.getElementById("regNum").value;
-    const vehicleMake = document.getElementById("vehicleMake").value;
-    const vehicleModel = document.getElementById("vehicleModel").value;
-    const vehicleColour = document.getElementById("vehicleColour").value;
-    const vehicleOwner = document.getElementById("vehicleOwner").value;
+    const rego = document.getElementById("rego").value;
+    const make = document.getElementById("make").value;
+    const model = document.getElementById("model").value;
+    const colour = document.getElementById("colour").value;
+    const owner = document.getElementById("owner").value;
     const results = document.querySelector(".results");
 
-    if (regNum.trim() === "" || vehicleMake.trim() === "" || vehicleModel.trim() === "" || vehicleColour.trim() === "" || vehicleOwner.trim() === "") 
+    if (rego.trim() === "" || make.trim() === "" || model.trim() === "" || colour.trim() === "" || owner.trim() === "") 
     {
         results.innerHTML = ""; // Clear any existing content inside the .results div
 
@@ -68,14 +68,14 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
 /////////////////////////////////////////////////
 
-    else if (regNum.trim() !== "" && vehicleMake.trim() !== "" && vehicleModel.trim() !== "" && vehicleColour.trim() !== "" && vehicleOwner.trim() !== "") 
+    else if (rego.trim() !== "" && make.trim() !== "" && model.trim() !== "" && colour.trim() !== "" && owner.trim() !== "") 
     {
         try 
         {
             const { data: existingVehicles, error: fetchError } = await supabase // Check if the regNum already exists in the database
                 .from("Vehicles")
                 .select("VehicleID")
-                .eq("VehicleID", regNum);
+                .eq("VehicleID", rego);
 
 ////////////////////////
 
@@ -89,7 +89,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
             if (existingVehicles && existingVehicles.length > 0) // If the regNum exists, display an error message
             {
                 const resultText = document.createElement("p"); // Create a new paragraph element for the result
-                resultText.textContent = `Registration: ${regNum} is already in the database!`;
+                resultText.textContent = `Registration: ${rego} is already in the database!`;
 
                 results.appendChild(resultText); // Append the result below the existing results heading
 
@@ -106,7 +106,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
             const { data: existingOwner, error: ownerError } = await supabase // Check if the owner already exists
                 .from("People")
                 .select("PersonID")
-                .eq("Name", vehicleOwner);
+                .eq("Name", owner);
 
 ////////////////////////
 
@@ -128,7 +128,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
             else 
             {
-                // If the owner doesn't exist, prompt for license number
+                // If the owner doesn't exist, prompt for details
                 const licenseDiv = document.createElement("div");
                 licenseDiv.classList.add("licenseDiv");
 
@@ -162,7 +162,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                             // Insert the new person with the provided license number
                             const { data: newOwner, error: insertError } = await supabase 
                                 .from("People")
-                                .insert([{ PersonID: newPersonID, Name: vehicleOwner, LicenseNumber: licenseNum }]);
+                                .insert([{ PersonID: newPersonID, Name: owner, LicenseNumber: licenseNum }]);
 
                             if (insertError) 
                             {
@@ -172,11 +172,12 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                             ownerId = newPersonID;
 
                             // Insert the new vehicle with the owner's PersonID
-                            const { error } = await supabase.from("Vehicles").insert({
-                                VehicleID: regNum,
-                                Make: vehicleMake,
-                                Model: vehicleModel,
-                                Colour: vehicleColour,
+                            const { error } = await supabase.from("Vehicles").insert(
+                            {
+                                VehicleID: rego,
+                                Make: make,
+                                Model: model,
+                                Colour: colour,
                                 OwnerID: ownerId
                             });
 
@@ -186,7 +187,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                             }
 
                             const resultText = document.createElement("p");
-                            resultText.textContent = `Successfully added vehicle registration number ${regNum}`;
+                            resultText.textContent = `Successfully added vehicle registration number ${rego}`;
                             results.appendChild(resultText);
                             
                             setTimeout(() => 
@@ -221,7 +222,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
 ////////////////////////
 
-            const { error } = await supabase.from("Vehicles").insert({ VehicleID: regNum, Make: vehicleMake, Model: vehicleModel, Colour: vehicleColour, OwnerID: ownerId }); // Insert the new vehicle with the owner's PersonID
+            const { error } = await supabase.from("Vehicles").insert({ VehicleID: rego, Make: make, Model: model, Colour: colour, OwnerID: ownerId }); // Insert the new vehicle with the owner's PersonID
 
             if (error) 
             {
@@ -231,7 +232,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 ////////////////////////
 
             const resultText = document.createElement("p"); // Create a new paragraph element for the result
-            resultText.textContent = `Successfully added vehicle with registration number: ${regNum}`;;
+            resultText.textContent = `Successfully added vehicle with registration number: ${rego}`;;
 
             results.appendChild(resultText); // Append the result below the existing results heading
 
