@@ -74,11 +74,6 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         
         document.getElementById("message").textContent = "Error";
         
-        setTimeout(() => 
-        {
-            document.getElementById("message").textContent = "";
-        }, 2500);
-        
         return;
     } 
 
@@ -92,11 +87,7 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
         
         document.getElementById("message").textContent = "Error";
-        
-        setTimeout(() => 
-        {
-            document.getElementById("message").textContent = "";
-        }, 2500);
+  
         return;
     }
 
