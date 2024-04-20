@@ -16,37 +16,40 @@ fetchData();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-document.getElementById("name").addEventListener("input", () => 
-{
-    const nameInput = document.getElementById("name");
-    const licenseInput = document.getElementById("license");
-    
-    if (nameInput.value.trim() !== '') // Check if the driver name input field is not empty
-    {
-        licenseInput.disabled = true; // Disable the license number input field
-    } 
-    else 
-    {
-        licenseInput.disabled = false; // Enable the license number input field
-    }
-});
+//CODE TO MAKE IT SO ONLY ONE INPUT BOX CAN BE USED AT A TIME - COMMENTED OUT TO MEET REQUIREMENTS
+//document.getElementById("name").addEventListener("input", () => 
+//{
+//    const nameInput = document.getElementById("name");
+//    const licenseInput = document.getElementById("license");
+//    
+//    if (nameInput.value.trim() !== '') // Check if the driver name input field is not empty
+//    {
+//        licenseInput.disabled = true; // Disable the license number input field
+//    } 
+//    else 
+//    {
+//        licenseInput.disabled = false; // Enable the license number input field
+//    }
+//});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-document.getElementById("license").addEventListener("input", () => 
-{
-    const nameInput = document.getElementById("name");
-    const licenseInput = document.getElementById("license");
-    
-    if (licenseInput.value.trim() !== "") // Check if the license number input field is not empty
-    {
-        nameInput.disabled = true; // Disable the driver name input field
-    } 
-    else 
-    {
-        nameInput.disabled = false; // Enable the driver name input field
-    }
-});
+
+//CODE TO MAKE IT SO ONLY ONE INPUT BOX CAN BE USED AT A TIME - COMMENTED OUT TO MEET REQUIREMENTS
+//document.getElementById("license").addEventListener("input", () => 
+//{
+//    const nameInput = document.getElementById("name");
+//    const licenseInput = document.getElementById("license");
+//    
+//    if (licenseInput.value.trim() !== "") // Check if the license number input field is not empty
+//    {
+//        nameInput.disabled = true; // Disable the driver name input field
+//    } 
+//    else 
+//    {
+//        nameInput.disabled = false; // Enable the driver name input field
+//    }
+//});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -60,26 +63,30 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
 
 /////////////////////////////////////////////////
 
-    if (name.trim() === "" && license.trim() === "") 
+    if (name.trim() === "" && license.trim() === "") //If both boxes empty
     {
-        results.innerHTML = ""; // Clear any existing content inside the .results div
-
-        const resultsHeading = document.createElement("h2"); // Create a new heading element
-        resultsHeading.textContent = "Search Results";
-
+        results.innerHTML = "";
         
-        const enterValuesText = document.createElement("p"); // Create a new paragraph element for the "Enter values" text
-        enterValuesText.textContent = "Please enter the data you would like to search for";
-
-        // Append the resultsHeading and enterValuesText to the .results div
-        results.appendChild(resultsHeading);
-        results.appendChild(enterValuesText);
+        document.getElementById("message").textContent = "Error";
         
-        setTimeout(() => // Reset the text content after 5 seconds
+        setTimeout(() => 
         {
-            results.removeChild(enterValuesText); // Remove the enterValuesText
+            document.getElementById("message").textContent = "";
         }, 2500);
         
+        return;
+    } 
+
+    else if (name.trim() !== "" && license.trim() !== "") //If both boxes have text
+    {
+        results.innerHTML = "";
+        
+        document.getElementById("message").textContent = "Error";
+        
+        setTimeout(() => 
+        {
+            document.getElementById("message").textContent = "";
+        }, 2500);
         return;
     }
 
@@ -112,6 +119,7 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
             const noResultsText = document.createElement("p");
             noResultsText.textContent = "No matching records found.";
             results.appendChild(noResultsText);
+            document.getElementById("message").textContent = "No result found";
         } 
         else 
         {
@@ -122,6 +130,8 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
                 personInfo.innerHTML = `<strong>Name: </strong>${person.Name}, <strong>Address: </strong>${person.Address}, <strong>DOB: </strong>${person.DOB}, <strong>License Number: </strong>${person.LicenseNumber}, <strong>Expiry Date: </strong>${person.ExpiryDate}`;
                 results.appendChild(personInfo);
             });
+
+            document.getElementById("message").textContent = "Search successful";
         }
     }
     
@@ -154,6 +164,7 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
             const noResultsText = document.createElement("p");
             noResultsText.textContent = "No matching records found.";
             results.appendChild(noResultsText);
+            document.getElementById("message").textContent = "No result found";
         } 
         else 
         {
@@ -164,6 +175,8 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
                 personInfo.innerHTML = `<strong>Name: </strong>${person.Name}, <strong>Address: </strong>${person.Address}, <strong>DOB: </strong>${person.DOB}, <strong>License Number: </strong>${person.LicenseNumber}, <strong>Expiry Date: </strong>${person.ExpiryDate}`;
                 results.appendChild(personInfo);
             });
+
+            document.getElementById("message").textContent = "Search successful";
         }
     }
 });
