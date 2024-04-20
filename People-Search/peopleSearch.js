@@ -65,7 +65,12 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
 
     if (name.trim() === "" && license.trim() === "") //If both boxes empty
     {
-        results.innerHTML = "";
+        results.innerHTML = ""; // Clear any existing content inside the .results div
+
+        const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
+        resultsHeading.textContent = "Search Results";
+
+        results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
         
         document.getElementById("message").textContent = "Error";
         
@@ -79,7 +84,12 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
 
     else if (name.trim() !== "" && license.trim() !== "") //If both boxes have text
     {
-        results.innerHTML = "";
+        results.innerHTML = ""; // Clear any existing content inside the .results div
+
+        const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
+        resultsHeading.textContent = "Search Results";
+
+        results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
         
         document.getElementById("message").textContent = "Error";
         
@@ -116,9 +126,10 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
 
         if (searchResults.length === 0) // Check if any results were found
         {
-            const noResultsText = document.createElement("p");
-            noResultsText.textContent = "No matching records found.";
-            results.appendChild(noResultsText);
+            //CODE TO MAKE THE MESSAGE APPEAR IN THE RESULTS ELEMENT
+            //const noResultsText = document.createElement("p");
+            //noResultsText.textContent = "No matching records found.";
+            //results.appendChild(noResultsText);
             document.getElementById("message").textContent = "No result found";
         } 
         else 
@@ -161,9 +172,10 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         
         if (searchResults.length === 0) // Check if any results were found
         {
-            const noResultsText = document.createElement("p");
-            noResultsText.textContent = "No matching records found.";
-            results.appendChild(noResultsText);
+            //CODE TO MAKE THE MESSAGE APPEAR IN THE RESULTS ELEMENT
+            //const noResultsText = document.createElement("p");
+            //noResultsText.textContent = "No matching records found.";
+            //results.appendChild(noResultsText);
             document.getElementById("message").textContent = "No result found";
         } 
         else 
