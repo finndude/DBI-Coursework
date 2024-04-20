@@ -47,18 +47,20 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
         const resultsHeading = document.createElement("h2"); // Create a new heading element
         resultsHeading.textContent = "Search Results";
 
-        
-        const enterValuesText = document.createElement("p"); // Create a new paragraph element for the "Enter values" text
-        enterValuesText.textContent = "Please enter the data you would like to search for";
-
+        //TO DISPLAY MESSAGE IN RESULTS BOX
+        //const enterValuesText = document.createElement("p"); // Create a new paragraph element for the "Enter values" text
+        //enterValuesText.textContent = "Please enter the data you would like to search for";
         
         results.appendChild(resultsHeading); // Append the resultsHeading and enterValuesText to the .results div
-        results.appendChild(enterValuesText);
+        //results.appendChild(enterValuesText);
         
-        setTimeout(() => // Reset the text content after 5 seconds
-        {
-            results.removeChild(enterValuesText); // Remove the enterValuesText
-        }, 2500);
+        document.getElementById("message").textContent = "Error";
+
+        //CODE TO CLEAR TEXT AFTER 2.5S
+        //setTimeout(() => 
+        //{
+        //    document.getElementById("message").textContent = "";
+        //}, 2500);
         
         return;
     }
@@ -89,9 +91,12 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
         
         if (searchResults.length === 0) // Check if any results were found
         {
-            const noResultsText = document.createElement("p");
-            noResultsText.textContent = "No matching records found.";
-            results.appendChild(noResultsText);
+            //CODE TO MAKE THE MESSAGE APPEAR IN THE RESULTS ELEMENT
+            //const noResultsText = document.createElement("p");
+            //noResultsText.textContent = "No matching records found.";
+            //results.appendChild(noResultsText);
+
+            document.getElementById("message").textContent = "No result found";
         } 
         else 
         {
@@ -113,6 +118,8 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
 
                 results.appendChild(vehicleInfo);
             });
+
+            document.getElementById("message").textContent = "Search successful";
         }
     }
 });

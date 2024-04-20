@@ -74,6 +74,12 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         
         document.getElementById("message").textContent = "Error";
         
+        //CODE TO CLEAR TEXT AFTER 2.5S
+        //setTimeout(() => 
+        //{
+        //    document.getElementById("message").textContent = "";
+        //}, 2500);
+        
         return;
     } 
 
@@ -88,6 +94,12 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         
         document.getElementById("message").textContent = "Error";
   
+        //CODE TO CLEAR TEXT AFTER 2.5S
+        //setTimeout(() => 
+        //{
+        //    document.getElementById("message").textContent = "";
+        //}, 2500);
+
         return;
     }
 
