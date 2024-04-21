@@ -36,6 +36,8 @@ fetchPeople();
 document.getElementById("addVehicleForm").addEventListener("submit", async (event) => 
 {
     event.preventDefault();
+ 
+    document.getElementById("message").textContent = "";
     
     const rego = document.getElementById("rego").value;
     const make = document.getElementById("make").value;
@@ -53,18 +55,20 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
         const resultsHeading = document.createElement("h2"); // Create a new heading element
         resultsHeading.textContent = "Result";
 
-        
-        const enterValuesText = document.createElement("p"); // Create a new paragraph element for the "Enter values" text
-        enterValuesText.textContent = "Please enter the data you would like to add";
+        //CODE TO SHOW OUTPUT IN RESULTS BOX
+        //const enterValuesText = document.createElement("p"); // Create a new paragraph element for the "Enter values" text
+        //enterValuesText.textContent = "Please enter the data you would like to add";
 
         results.appendChild(resultsHeading); // Append the resultsHeading and enterValuesText to the .results div
-        results.appendChild(enterValuesText);
+        //results.appendChild(enterValuesText);
         
-        setTimeout(() => // Reset the text content after 5 seconds
-        {
-            results.removeChild(enterValuesText); // Remove the enterValuesText
-        }, 2500);
+        //setTimeout(() => // Reset the text content after 5 seconds
+        //{
+        //    results.removeChild(enterValuesText); // Remove the enterValuesText
+        //}, 2500);
         
+        document.getElementById("message").textContent = "Error";
+
         return;
     }
 
@@ -244,15 +248,20 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                                 throw error;
                             }
 
-                            const resultText = document.createElement("p");
-                            resultText.textContent = `Successfully added vehicle registration number ${rego}`;
-                            results.appendChild(resultText);
-                            
-                            setTimeout(() => 
-                            {
-                                results.removeChild(resultText);
-                                personForm.remove(); // Remove the entry boxes, text, buttons etc
-                            }, 2500);
+                            //CODE TO PUT OUTPUT IN RESULTS BOX
+                            //const resultText = document.createElement("p");
+                            //resultText.textContent = `Successfully added vehicle registration number ${rego}`;
+                            //results.appendChild(resultText);
+
+                            document.getElementById("message").textContent = "Vehicle added successfully";
+                            personForm.remove();
+
+
+                            //setTimeout(() => 
+                            //{
+                            //    results.removeChild(resultText);
+                            //    personForm.remove(); // Remove the entry boxes, text, buttons etc
+                            //}, 2500);
                         } 
                         
                         catch (error) 
@@ -307,16 +316,18 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
 ////////////////////////
 
-            const resultText = document.createElement("p"); // Create a new paragraph element for the result
-            resultText.textContent = `Successfully added vehicle with registration number: ${rego}`;;
+            //CODE TO PUT OUTPUT IN RESULTS BOX
+            //const resultText = document.createElement("p"); // Create a new paragraph element for the result
+            //resultText.textContent = `Successfully added vehicle with registration number: ${rego}`;;
 
-            results.appendChild(resultText); // Append the result below the existing results heading
+            //results.appendChild(resultText); // Append the result below the existing results heading
 
-            setTimeout(() => // Set a timeout to remove the result after 2.5 seconds
-            {
-                results.removeChild(resultText);
-            }, 2500);
+            //setTimeout(() => // Set a timeout to remove the result after 2.5 seconds
+            //{
+            //    results.removeChild(resultText);
+            //}, 2500);
 
+            document.getElementById("message").textContent = "Vehicle added successfully";
         } 
         
 ////////////////////////
