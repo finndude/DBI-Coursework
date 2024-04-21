@@ -120,10 +120,10 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
 
         results.innerHTML = ""; // Clear any existing content inside the .results div
 
-        //const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
-        //resultsHeading.textContent = "Search Results";
+        const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
+        resultsHeading.textContent = "Search Results";
 
-        //results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
+        results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
 
 ////////////////////////
 
@@ -139,7 +139,10 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         {
             searchResults.forEach(person => // Loop through each search result and display it
             {
-                document.getElementById("results").innerHTML = `<p>SG345PQ</p>`
+                const personInfo = document.createElement("p");
+                personInfo.textContent = `Name: ${person.Name}, Address: ${person.Address}, DOB: ${person.DOB}, License Number: ${person.LicenseNumber}, Expiry Date: ${person.ExpiryDate}`;
+                personInfo.innerHTML = `<strong>Name: </strong>${person.Name}, <strong>Address: </strong>${person.Address}, <strong>DOB: </strong>${person.DOB}, <strong>License Number: </strong>${person.LicenseNumber}, <strong>Expiry Date: </strong>${person.ExpiryDate}`;
+                results.appendChild(personInfo);
             });
 
             document.getElementById("message").textContent = "Search successful";
@@ -163,10 +166,10 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         
         results.innerHTML = ""; // Clear any existing content inside the .results div
 
-        //const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
-        //resultsHeading.textContent = "Search Results";
+        const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
+        resultsHeading.textContent = "Search Results";
 
-        //results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
+        results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
 
 ////////////////////////
         
@@ -182,7 +185,10 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         {
             searchResults.forEach(person => // Loop through each search result and display it
             {
-                document.getElementById("results").innerHTML = `<p>SG345PQ</p>`
+                const personInfo = document.createElement("p");
+                personInfo.textContent = `Name: ${person.Name}, Address: ${person.Address}, DOB: ${person.DOB}, License Number: ${person.LicenseNumber}, Expiry Date: ${person.ExpiryDate}`;
+                personInfo.innerHTML = `<strong>Name: </strong>${person.Name}, <strong>Address: </strong>${person.Address}, <strong>DOB: </strong>${person.DOB}, <strong>License Number: </strong>${person.LicenseNumber}, <strong>Expiry Date: </strong>${person.ExpiryDate}`;
+                results.appendChild(personInfo);
             });
 
             document.getElementById("message").textContent = "Search successful";
