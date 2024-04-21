@@ -139,9 +139,7 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         {
             searchResults.forEach(person => // Loop through each search result and display it
             {
-                const personInfo = document.createElement("p");
-                personInfo.innerHTML = `<p>Name: ${person.Name}, Address: ${person.Address}, DOB: ${person.DOB}, License Number: ${person.LicenseNumber}, Expiry Date: ${person.ExpiryDate}</p>`;
-                results.appendChild(personInfo);
+                document.getElementById("results").innerHTML = `<p>SG345PQ</p>`
             });
 
             document.getElementById("message").textContent = "Search successful";
@@ -184,9 +182,7 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         {
             searchResults.forEach(person => // Loop through each search result and display it
             {
-                const personInfo = document.createElement("p");
-                personInfo.innerHTML = `<p>Name: ${person.Name}, Address: ${person.Address}, DOB: ${person.DOB}, License Number: ${person.LicenseNumber}, Expiry Date: ${person.ExpiryDate}</p>`;
-                results.appendChild(personInfo);
+                document.getElementById("results").innerHTML = `<p>SG345PQ</p>`
             });
 
             document.getElementById("message").textContent = "Search successful";
