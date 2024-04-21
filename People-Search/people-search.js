@@ -120,10 +120,10 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
 
         results.innerHTML = ""; // Clear any existing content inside the .results div
 
-        const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
-        resultsHeading.textContent = "Search Results";
+        //const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
+        //resultsHeading.textContent = "Search Results";
 
-        results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
+        //results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
 
 ////////////////////////
 
@@ -165,10 +165,10 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         
         results.innerHTML = ""; // Clear any existing content inside the .results div
 
-        const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
-        resultsHeading.textContent = "Search Results";
+        //const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
+        //resultsHeading.textContent = "Search Results";
 
-        results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
+        //results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
 
 ////////////////////////
         
