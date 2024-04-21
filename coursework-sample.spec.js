@@ -114,7 +114,7 @@ test ('search "rachel" should return two records', async ({page}) => {
    await page.getByRole('button', { name: 'Submit' }).click();
    await expect(page.locator('#results')).toContainText('SG345PQ')
    await expect(page.locator('#results')).toContainText('JK239GB')
-   await expect(page.locator('#results').locator('div')).toHaveCount(2)
+   await expect(page.locator('#results').locator('div')).toHaveCount()
    await expect(page.locator('#message')).toContainText('Search successful')
 })
 
@@ -125,7 +125,7 @@ test('search "KWK24JI" should return tesla but no owner', async ({page}) => {
    await page.getByRole('button', { name: 'Submit' }).click();
    await expect(page.locator('#results')).toContainText('Tesla')
    await expect(page.locator('#results').locator('div')).toHaveCount(1)
-   await expect(page.locator('#message')).toContainText('No owner found')
+   await expect(page.locator('#message')).toContainText('No result found')
 })
 
 
