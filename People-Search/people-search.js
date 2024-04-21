@@ -139,10 +139,15 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         {
             searchResults.forEach(person => // Loop through each search result and display it
             {
+                const personDiv = document.createElement("div"); // Create a new div element for the search result
+                personDiv.classList.add("search-result"); // Add a class to the div for styling
+                
                 const personInfo = document.createElement("p");
                 personInfo.textContent = `Name: ${person.Name}, Address: ${person.Address}, DOB: ${person.DOB}, License Number: ${person.LicenseNumber}, Expiry Date: ${person.ExpiryDate}`;
                 personInfo.innerHTML = `<strong>Name: </strong>${person.Name}, <strong>Address: </strong>${person.Address}, <strong>DOB: </strong>${person.DOB}, <strong>License Number: </strong>${person.LicenseNumber}, <strong>Expiry Date: </strong>${person.ExpiryDate}`;
-                results.appendChild(personInfo);
+                
+                personDiv.appendChild(personInfo); // Append the person info to the div
+                results.appendChild(personDiv); // Append the div to the .results div
             });
 
             document.getElementById("message").textContent = "Search successful";
@@ -154,7 +159,6 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
     else if (license.trim() !== "")
     {
         const searchTerm = license.toLowerCase(); // Convert the input and the license numbers in the database to lowercase for case-insensitive comparison
-
 
         const searchResults = fetchedData.filter(person => // Filter the fetched data based on the search term
         {
@@ -185,10 +189,15 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         {
             searchResults.forEach(person => // Loop through each search result and display it
             {
+                const personDiv = document.createElement("div"); // Create a new div element for the search result
+                personDiv.classList.add("search-result"); // Add a class to the div for styling
+                
                 const personInfo = document.createElement("p");
                 personInfo.textContent = `Name: ${person.Name}, Address: ${person.Address}, DOB: ${person.DOB}, License Number: ${person.LicenseNumber}, Expiry Date: ${person.ExpiryDate}`;
                 personInfo.innerHTML = `<strong>Name: </strong>${person.Name}, <strong>Address: </strong>${person.Address}, <strong>DOB: </strong>${person.DOB}, <strong>License Number: </strong>${person.LicenseNumber}, <strong>Expiry Date: </strong>${person.ExpiryDate}`;
-                results.appendChild(personInfo);
+                
+                personDiv.appendChild(personInfo); // Append the person info to the div
+                results.appendChild(personDiv); // Append the div to the .results div
             });
 
             document.getElementById("message").textContent = "Search successful";
