@@ -84,7 +84,7 @@ nav ul li
 
 /*---------------------------------------------*/
 
-.results 
+#results 
 {
     border: 2px dotted black; /* Add border around the results */
     padding: 10px 10px; /* Add padding inside the border */
