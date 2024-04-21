@@ -187,11 +187,7 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
             {
                 const personParagraph = document.createElement("p"); // Create a paragraph element for each search result
                 personParagraph.innerHTML = 
-                    `<strong>Name:</strong> ${person.Name}, 
-                    <strong>Address:</strong> ${person.Address}, 
-                    <strong>DOB:</strong> ${person.DOB}, 
-                    <strong>License Number:</strong> ${person.LicenseNumber}, 
-                    <strong>Expiry Date:</strong> ${person.ExpiryDate}`;
+                    `SG345PQ`;
                 results.appendChild(personParagraph); // Append the paragraph element to the results
             });
 
