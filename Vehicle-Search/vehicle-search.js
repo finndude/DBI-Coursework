@@ -121,7 +121,7 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
                     vehicleDiv.innerHTML += `
                         <strong>Owner's Name: </strong>Unknown, <strong>License Number: </strong>Unknown`;
 
-                    document.getElementById("message").textContent = "No result found";
+                    document.getElementById("message").textContent = "Search successful";
                 }
 
                 results.appendChild(vehicleDiv); // Append the vehicleDiv to the .results div
