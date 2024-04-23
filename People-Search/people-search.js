@@ -189,10 +189,14 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
         {
             searchResults.forEach(person => // Loop through each search result and display it
             {
+                const personDiv = document.createElement("div"); // Create a new div for each search result
+                personDiv.classList.add("person-result");
+
                 const personInfo = document.createElement("p");
                 personInfo.textContent = `Name: ${person.Name}, Address: ${person.Address}, DOB: ${person.DOB}, License Number: ${person.LicenseNumber}, Expiry Date: ${person.ExpiryDate}`;
-                personInfo.innerHTML = `<strong>Name: </strong>${person.Name}, <strong>Address: </strong>${person.Address}, <strong>DOB: </strong>${person.DOB}, <strong>License Number: </strong>${person.LicenseNumber}, <strong>Expiry Date: </strong>${person.ExpiryDate}`;
-                results.appendChild(personInfo);
+                personDiv.appendChild(personInfo);
+
+                results.appendChild(personDiv); // Append the personDiv to the .results div
             });
 
             document.getElementById("message").textContent = "Search successful";
