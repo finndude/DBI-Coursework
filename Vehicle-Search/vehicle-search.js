@@ -102,22 +102,35 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
         {
             searchResults.forEach(vehicle => // Loop through each search result and display it
             {
-                const vehicleInfo = document.createElement("p");
-                vehicleInfo.innerHTML = `<strong>Number Plate: </strong>${vehicle.VehicleID}, <strong>Make: </strong>${vehicle.Make}, <strong>Model: </strong>${vehicle.Model}, <strong>Colour: </strong>${vehicle.Colour}`;
+                const vehicleDiv = document.createElement("div"); // Create a new div for each vehicle
+                vehicleDiv.classList.add("vehicle-info"); // Add a CSS class for styling if needed
 
-                
+                vehicleDiv.innerHTML = `
+                    <strong>Number Plate: </strong>${vehicle.VehicleID}<br>
+                    <strong>Make: </strong>${vehicle.Make}<br>
+                    <strong>Model: </strong>${vehicle.Model}<br>
+                    <strong>Colour: </strong>${vehicle.Colour}<br>
+                `;
+
                 const owner = fetchedPeople.find(person => person.PersonID === vehicle.OwnerID); // Fetch owner details from the People table using OwnerID
                 if (owner) 
                 {
-                    vehicleInfo.innerHTML += `, <strong>Owner's Name: </strong>${owner.Name}, <strong>License Number: </strong>${owner.LicenseNumber}`; // If owner is found, display their name and license number
+                    vehicleDiv.innerHTML += `
+                        <strong>Owner's Name: </strong>${owner.Name}<br>
+                        <strong>License Number: </strong>${owner.LicenseNumber}<br>
+                    `;
                 } 
                 else 
                 {
-                    vehicleInfo.innerHTML += `, <strong>Owner's Name: </strong>Unknown, <strong>License Number: </strong>Unknown`; // If owner is not found, indicate that the owner is unknown
+                    vehicleDiv.innerHTML += `
+                        <strong>Owner's Name: </strong>Unknown<br>
+                        <strong>License Number: </strong>Unknown<br>
+                    `;
                 }
 
-                results.appendChild(vehicleInfo);
+                results.appendChild(vehicleDiv); // Append the vehicleDiv to the .results div
             });
+
 
             document.getElementById("message").textContent = "Search successful";
         }
