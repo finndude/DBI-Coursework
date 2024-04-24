@@ -74,7 +74,7 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
         const searchTerm = rego.toLowerCase(); // Convert the input to lowercase for case-insensitive comparison
 
         
-        const searchResults = fetchedData.filter(vehicle => // Filter the fetched data based on the search term
+        const searchResults = fetchedVehicles.filter(vehicle => // Filter the fetched data based on the search term
         {
             const numPlate = `${vehicle.VehicleID}`.toLowerCase(); // Convert each vehicle's number plate to lowercase for comparison
             
