@@ -44,11 +44,13 @@
 
         <main class="mainBody">
 
-            <p>Search by driver name: <input type="text" id="name"></p>
-            <p>Search by driving license number: <input type="text" id="license"></p>
-            <button type="button" id="Submit">Submit</button>
+            <form id="peopleSearchForm">
+                <p>Search by driver name: <input type="text" id="name"></p>
+                <p>Search by driving license number: <input type="text" id="license"></p>
+                <input type="submit" value="Submit">
+            </form>
 
-            <div id="results">
+            <div id="results" class="results">
 
                 <h2>Search Results</h2>
 
