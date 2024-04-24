@@ -53,7 +53,7 @@ fetchData();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-document.getElementById("peopleSearchForm").addEventListener("submit", async (event) => 
+document.getElementById("Submit").addEventListener("click", async (event) => 
 {
     event.preventDefault();
     
