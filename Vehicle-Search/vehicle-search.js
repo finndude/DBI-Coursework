@@ -99,22 +99,26 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
 
                 vehicleDiv.innerHTML = `<strong>Number Plate: </strong>${vehicle.VehicleID}, <strong>Make: </strong>${vehicle.Make}, <strong>Model: </strong>${vehicle.Model}, <strong>Colour: </strong>${vehicle.Colour},`;
 
-                if (fetchedPeople && fetchedPeople.length > 0) {
-                    const owner = fetchedPeople.find(person => person.PersonID === vehicle.OwnerID);
-                    if (owner) {
-                        vehicleDiv.innerHTML += `
-                            <strong>Owner's Name: </strong>${owner.Name}, 
-                            <strong>License Number: </strong>${owner.LicenseNumber}`;
-                    } else {
-                        vehicleDiv.innerHTML += `<strong>Owner's Name: </strong>Unknown, <strong>License Number: </strong>Unknown`;
-                    }
-                } else {
-                    // Handle case where fetchedPeople is undefined or empty
-                    vehicleDiv.innerHTML += `<strong>Owner's Name: </strong>Unknown, <strong>License Number: </strong>Unknown`;
+                const owner = fetchedPeople.find(person => person.PersonID === vehicle.OwnerID); // Fetch owner details from the People table using OwnerID
+                if (owner) 
+                {
+                    vehicleDiv.innerHTML += `
+                        <strong>Owner's Name: </strong>${owner.Name}, <strong>License Number: </strong>${owner.LicenseNumber}`;
+
+                    document.getElementById("message").textContent = "Search successful";
+                } 
+                else 
+                {
+                    vehicleDiv.innerHTML += `
+                        <strong>Owner's Name: </strong>Unknown, <strong>License Number: </strong>Unknown`;
+
+                    document.getElementById("message").textContent = "Search successful";
                 }
-            
-                results.appendChild(vehicleDiv);
+
+                results.appendChild(vehicleDiv); // Append the vehicleDiv to the .results div
             });
+
+            document.getElementById("message").textContent = "Search successful";
         }
     }
 });
