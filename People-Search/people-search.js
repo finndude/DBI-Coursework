@@ -4,8 +4,6 @@ const supabase = createClient("https://adbhzvvfknicxaxnowok.supabase.co", "eyJhb
 
 let fetchedData; // Define a global variable to hold the fetched data
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 //CODE TO MAKE IT SO ONLY ONE INPUT BOX CAN BE USED AT A TIME - COMMENTED OUT TO MEET REQUIREMENTS
@@ -53,7 +51,8 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
 
     const {data, error} = await supabase.from("People").select();
     
-    if (error) {
+    if (error) 
+    {
         console.error("Error fetching data:", error.message);
         return;
     }
