@@ -2,7 +2,7 @@ import {createClient} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+
 
 const supabase = createClient("https://adbhzvvfknicxaxnowok.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFkYmh6dnZma25pY3hheG5vd29rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI3NjYyMTgsImV4cCI6MjAyODM0MjIxOH0.spZ9Df831dq8DIglVvdsbnn6ygk2YL1q7ecG8MvH_zw")
 
-let fetchedData; // Define a global variable to hold the fetched data
+let fetchedVehicles; // Define a global variable to hold the fetched data
 let fetchedPeople; // Define a global variable to hold the fetched data
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13,11 +13,26 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
 
 /////////////////////////////////////////////////
     
-    const {data, error} = await supabase.from("Vehicles").select();
-    fetchedData = data;
+    const {data: vehicleData, error: vehicleError} = await supabase.from("Vehicles").select();
 
+    if (vehicleError) 
+    {
+        console.error("Error fetching data:", error.message);
+        return;
+    }
+
+    fetchedVehicles = vehicleData;
+
+////////////////////
 
     const {data: peopleData, error: peopleError} = await supabase.from("People").select();
+
+    if (peopleError) 
+    {
+        console.error("Error fetching data:", error.message);
+        return;
+    }
+
     fetchedPeople = peopleData;      
 
 /////////////////////////////////////////////////
@@ -59,7 +74,7 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
         const searchTerm = rego.toLowerCase(); // Convert the input to lowercase for case-insensitive comparison
 
         
-        const searchResults = fetchedData.filter(vehicle => // Filter the fetched data based on the search term
+        const searchResults = fetchedVehicles.filter(vehicle => // Filter the fetched data based on the search term
         {
             const numPlate = `${vehicle.VehicleID}`.toLowerCase(); // Convert each vehicle's number plate to lowercase for comparison
             
