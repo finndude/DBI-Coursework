@@ -4,15 +4,7 @@ const supabase = createClient("https://adbhzvvfknicxaxnowok.supabase.co", "eyJhb
 
 let fetchedData; // Define a global variable to hold the fetched data
 
-async function fetchData() 
-{
-    const {data, error} = await supabase.from("People").select();
-    console.log("Fetched data:", data);
 
-    fetchedData = data;
-}
-
-fetchData();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -56,6 +48,18 @@ fetchData();
 document.getElementById("peopleSearchForm").addEventListener("submit", async (event) => 
 {
     event.preventDefault();
+
+    const {data, error} = await supabase.from("People").select();
+    
+    if (error) {
+        console.error("Error fetching data:", error.message);
+        return;
+    }
+
+    fetchedData = data;
+
+    console.log("Fetched data:", data);
+  
     
     const name = document.getElementById("name").value;
     const license = document.getElementById("license").value;
