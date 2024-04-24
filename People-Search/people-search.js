@@ -53,7 +53,7 @@ fetchData();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-document.getElementById("Submit").addEventListener("click", async (event) => 
+document.querySelector("#Submit").addEventListener("click", async (event) => 
 {
     event.preventDefault();
     
