@@ -97,20 +97,26 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
                 const vehicleDiv = document.createElement("div"); // Create a new div for each vehicle
                 vehicleDiv.classList.add("vehicle-info"); // Add a CSS class for styling if needed
 
-                vehicleDiv.innerHTML = `<strong>Number Plate: </strong>${vehicle.VehicleID}, <strong>Make: </strong>${vehicle.Make}, <strong>Model: </strong>${vehicle.Model}, <strong>Colour: </strong>${vehicle.Colour},`;
+                vehicleDiv.innerHTML = `<strong>Number Plate: </strong>${vehicle.VehicleID}, <strong>Make: </strong>${vehicle.Make}, <strong>Model: </strong>${vehicle.Model}, <strong>Colour: </strong>${vehicle.Colour}`;
 
-                if (fetchedPeople && fetchedPeople.length > 0) {
+                if (fetchedPeople && fetchedPeople.length > 0) 
+                {
                     const owner = fetchedPeople.find(person => person.PersonID === vehicle.OwnerID);
-                    if (owner) {
+                    if (owner) 
+                    {
                         vehicleDiv.innerHTML += `
-                            <strong>Owner's Name: </strong>${owner.Name}, 
+                            <strong>, Owner's Name: </strong>${owner.Name}, 
                             <strong>License Number: </strong>${owner.LicenseNumber}`;
-                    } else {
-                        vehicleDiv.innerHTML += `<strong>Owner's Name: </strong>Unknown, <strong>License Number: </strong>Unknown`;
+                    } 
+                    else 
+                    {
+                        vehicleDiv.innerHTML += ``;
                     }
-                } else {
+                } 
+                else 
+                {
                     // Handle case where fetchedPeople is undefined or empty
-                    vehicleDiv.innerHTML += `<strong>Owner's Name: </strong>Unknown, <strong>License Number: </strong>Unknown`;
+                   // vehicleDiv.innerHTML += `<strong>Owner's Name: </strong>Unknown, <strong>License Number: </strong>Unknown`;
                 }
             
                 results.appendChild(vehicleDiv);
