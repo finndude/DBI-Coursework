@@ -69,47 +69,50 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
 
 /////////////////////////////////////////////////
 
-    else if (rego.trim() !== "") 
+    try 
     {
-        const searchTerm = rego.toLowerCase(); // Convert the input to lowercase for case-insensitive comparison
+        const { data: vehiclesData, error: vehiclesError } = await supabase
+            .from("Vehicles")
+            .select()
+            .textSearch("VehicleID", rego);
 
-        
-        const searchResults = fetchedVehicles.filter(vehicle => // Filter the fetched data based on the search term
+        if (vehiclesError) 
         {
-            const numPlate = `${vehicle.VehicleID}`.toLowerCase(); // Convert each vehicle's number plate to lowercase for comparison
-            
-            return numPlate.includes(searchTerm); // Check if the search term is included in the vehicle's number plate
-        });
+            console.error("Error fetching vehicles data:", vehiclesError.message);
+            return;
+        }
 
-        
-        results.innerHTML = ""; // Clear any existing content inside the .results div
+        fetchedVehicles = vehiclesData;
 
-        
-        const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
-        resultsHeading.textContent = "Search Results";
-        results.appendChild(resultsHeading);
+        const { data: peopleData, error: peopleError } = await supabase
+            .from("People")
+            .select();
 
-////////////////////////
-        
-        if (searchResults.length === 0) // Check if any results were found
+        if (peopleError)
         {
-            //CODE TO MAKE THE MESSAGE APPEAR IN THE RESULTS ELEMENT
-            //const noResultsText = document.createElement("p");
-            //noResultsText.textContent = "No matching records found.";
-            //results.appendChild(noResultsText);
+            console.error("Error fetching people data:", peopleError.message);
+            return;
+        }
 
-            document.getElementById("message").textContent = "No result found";
-        } 
-        else 
+        fetchedPeople = peopleData;
+
+        results.innerHTML = ""; // Clear previous results
+
+        const searchResults = fetchedVehicles.filter(vehicle => 
+            vehicle.VehicleID.toLowerCase().includes(rego.toLowerCase())
+        );
+
+        if (searchResults.length > 0) 
         {
-            searchResults.forEach(vehicle => // Loop through each search result and display it
+            searchResults.forEach(vehicle => 
             {
-                const vehicleDiv = document.createElement("div"); // Create a new div for each vehicle
-                vehicleDiv.classList.add("vehicle-result"); // Add a CSS class for styling if needed
+                const vehicleDiv = document.createElement("div");
+                vehicleDiv.classList.add("vehicle-result");
 
                 vehicleDiv.innerHTML = `<strong>Number Plate: </strong>${vehicle.VehicleID}, <strong>Make: </strong>${vehicle.Make}, <strong>Model: </strong>${vehicle.Model}, <strong>Colour: </strong>${vehicle.Colour}`;
-                                
+
                 const owner = fetchedPeople.find(person => person.PersonID === vehicle.OwnerID);
+                
                 if (owner) 
                 {
                     vehicleDiv.innerHTML += `, <strong>Owner's Name: </strong>${owner.Name}, <strong>License Number: </strong>${owner.LicenseNumber}`;
@@ -118,12 +121,23 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
                 {
                     vehicleDiv.innerHTML += ``;
                 }
-                
+
                 results.appendChild(vehicleDiv);
             });
 
             document.getElementById("message").textContent = "Search successful";
+        } 
+        else 
+        {
+            // No matching records found
+            results.innerHTML = "<p>No matching records found</p>";
+            document.getElementById("message").textContent = "";
         }
+    } 
+    
+    catch (error) 
+    {
+        console.error("Error:", error.message);
     }
 });
 

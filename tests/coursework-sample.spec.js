@@ -4,7 +4,7 @@ import exp from 'constants';
 const { test, expect} = require('@playwright/test');
 
 // change this to the URL of your website, could be local or GitHub pages
-const websiteURL = 'https://finndude.github.io/DBI-Coursework/People-Search/people-search.html';
+const websiteURL = 'http://127.0.0.1:3000/';
 
 // Go to the website home page before each test.
 test.beforeEach(async ({ page }) => {
@@ -33,7 +33,7 @@ test('link - vehicle search', async ({ page }) => {
 // head
 test('should set the language to English', async ({ page }) => {
    const htmlElement = await page.locator('html');
-   expect(htmlElement).toHaveAttribute('lang','en');
+   await expect(htmlElement).toHaveAttribute('lang','en');
 });
 
 // semantic structure elements
@@ -137,7 +137,7 @@ test('add a vehicle', async ({page}) => {
    await page.locator('#model').fill('Taycan')
    await page.locator('#colour').fill('white')
    await page.locator('#owner').fill('Kai')
-   await page.getByRole('button', { name: 'Add' }).click();
+   await page.getByRole('button', { name: 'Add vehicle' }).click();
 
    // add a new person
    await page.locator('#personid').fill('6')
