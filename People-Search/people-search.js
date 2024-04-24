@@ -55,11 +55,11 @@ fetchData();
 
 document.getElementById("peopleSearchForm").addEventListener("submit", async (event) => 
 {
-    //event.preventDefault();
+    event.preventDefault();
     
     const name = document.getElementById("name").value;
     const license = document.getElementById("license").value;
-    const results = document.querySelector(".results");
+    const results = document.querySelector("#results");
 
 /////////////////////////////////////////////////
 
