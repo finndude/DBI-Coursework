@@ -49,6 +49,8 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
 {
     event.preventDefault();
 
+/////////////////////////////////////////////////
+
     const {data, error} = await supabase.from("People").select();
     
     if (error) {
@@ -57,10 +59,9 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
     }
 
     fetchedData = data;
-
-    console.log("Fetched data:", data);
-  
     
+/////////////////////////////////////////////////
+
     const name = document.getElementById("name").value;
     const license = document.getElementById("license").value;
     const results = document.querySelector(".results");

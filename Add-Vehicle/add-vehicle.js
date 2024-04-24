@@ -6,37 +6,38 @@ let fetchedVehicles; // Define a global variable to hold the fetched data
 let fetchedPeople; // Define a global variable to hold the fetched data
 let maxPersonID = 0;
 
-/////////////////////////////////////////////////
-
-async function fetchVehicles() 
-{
-    const {data, error} = await supabase.from("Vehicles").select();
-    console.log("Fetched Vehicles:", data);
-
-    fetchedVehicles = data;
-}
-
-fetchVehicles();
-
-/////////////////////////////////////////////////
-
-async function fetchPeople() 
-{
-    const {data, error} = await supabase.from("People").select();
-    console.log("Fetched People:", data);
-
-    fetchedPeople = data;
-}
-
-fetchPeople();
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 document.getElementById("addVehicleForm").addEventListener("submit", async (event) => 
 {
     event.preventDefault();
+
+/////////////////////////////////////////////////
+
+    const {dataPeople, errorPeople} = await supabase.from("People").select();
+    
+    if (errorPeople) 
+    {
+        console.error("Error fetching data:", error.message);
+        return;
+    }
+
+    fetchedPeople = dataPeople;
+
+/////////////////////////////////////////////////
+
+    const {dataVehicles, errorVehicles} = await supabase.from("Vehicles").select();
+    
+    if (errorVehicles) 
+    {
+        console.error("Error fetching data:", error.message);
+        return;
+    }
+
+    fetchedVehicles = dataVehicles;
  
+/////////////////////////////////////////////////
+
     document.getElementById("message").textContent = "";
     
     const rego = document.getElementById("rego").value;
