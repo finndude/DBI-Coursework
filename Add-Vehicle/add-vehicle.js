@@ -44,7 +44,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
     const model = document.getElementById("model").value;
     const colour = document.getElementById("colour").value;
     const owner = document.getElementById("owner").value;
-    const results = document.querySelector(".results");
+    const results = document.querySelector("#results");
 
 /////////////////////////////////////////////////
 

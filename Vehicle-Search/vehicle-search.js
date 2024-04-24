@@ -36,7 +36,7 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
     event.preventDefault();
     
     const rego = document.getElementById("rego").value;
-    const results = document.querySelector(".results");
+    const results = document.querySelector("#results");
 
 /////////////////////////////////////////////////
 

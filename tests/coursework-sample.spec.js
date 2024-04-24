@@ -111,7 +111,7 @@ test ('CSS grid is used to layout the page components', async({page}) => {
 // people search
 test ('search "rachel" should return two records', async ({page}) => {
    await page.locator('#name').fill('rachel')
-   await page.getByRole('button', { name: 'Add' }).click();
+   await page.getByRole('button', { name: 'Submit' }).click();
    await expect(page.locator('#results')).toContainText('SG345PQ')
    await expect(page.locator('#results')).toContainText('JK239GB')
    await expect(page.locator('#results').locator('div')).toHaveCount(2)
