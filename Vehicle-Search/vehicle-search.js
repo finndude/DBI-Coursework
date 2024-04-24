@@ -2,7 +2,7 @@ import {createClient} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+
 
 const supabase = createClient("https://adbhzvvfknicxaxnowok.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFkYmh6dnZma25pY3hheG5vd29rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI3NjYyMTgsImV4cCI6MjAyODM0MjIxOH0.spZ9Df831dq8DIglVvdsbnn6ygk2YL1q7ecG8MvH_zw")
 
-let fetchedVehicles; // Define a global variable to hold the fetched data
+let fetchedData; // Define a global variable to hold the fetched data
 let fetchedPeople; // Define a global variable to hold the fetched data
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -12,31 +12,21 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
     event.preventDefault();
 
 /////////////////////////////////////////////////
+    
+    const {data, error} = await supabase.from("Vehicles").select();
+    console.log("Fetched Vehicles:", data);
+
+    fetchedData = data;
+
+////////////////////////
 
     const {dataPeople, errorPeople} = await supabase.from("People").select();
-        
-    if (errorPeople) 
-    {
-        console.error("Error fetching data:", error.message);
-        return;
-    }
+    console.log("Fetched People:", data);
 
     fetchedPeople = dataPeople;
 
 /////////////////////////////////////////////////
 
-    const {dataVehicles, errorVehicles} = await supabase.from("Vehicles").select();
-
-    if (errorVehicles) 
-    {
-        console.error("Error fetching data:", error.message);
-        return;
-    }
-
-    fetchedVehicles = dataVehicles;
-
-/////////////////////////////////////////////////
-    
     const rego = document.getElementById("rego").value;
     const results = document.querySelector("#results");
 
@@ -74,7 +64,7 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
         const searchTerm = rego.toLowerCase(); // Convert the input to lowercase for case-insensitive comparison
 
         
-        const searchResults = fetchedVehicles.filter(vehicle => // Filter the fetched data based on the search term
+        const searchResults = fetchedData.filter(vehicle => // Filter the fetched data based on the search term
         {
             const numPlate = `${vehicle.VehicleID}`.toLowerCase(); // Convert each vehicle's number plate to lowercase for comparison
             
@@ -107,26 +97,23 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
                 const vehicleDiv = document.createElement("div"); // Create a new div for each vehicle
                 vehicleDiv.classList.add("vehicle-info"); // Add a CSS class for styling if needed
 
-                vehicleDiv.innerHTML = `
-                    <strong>Number Plate: </strong>${vehicle.VehicleID}, <strong>Make: </strong>${vehicle.Make}, <strong>Model: </strong>${vehicle.Model}, <strong>Colour: </strong>${vehicle.Colour},`;
+                vehicleDiv.innerHTML = `<strong>Number Plate: </strong>${vehicle.VehicleID}, <strong>Make: </strong>${vehicle.Make}, <strong>Model: </strong>${vehicle.Model}, <strong>Colour: </strong>${vehicle.Colour},`;
 
-                const owner = fetchedPeople.find(person => person.PersonID === vehicle.OwnerID); // Fetch owner details from the People table using OwnerID
-                if (owner) 
-                {
-                    vehicleDiv.innerHTML += `
-                        <strong>Owner's Name: </strong>${owner.Name}, <strong>License Number: </strong>${owner.LicenseNumber}`;
-
-                    document.getElementById("message").textContent = "Search successful";
-                } 
-                else 
-                {
-                    vehicleDiv.innerHTML += `
-                        <strong>Owner's Name: </strong>Unknown, <strong>License Number: </strong>Unknown`;
-
-                    document.getElementById("message").textContent = "Search successful";
+                if (fetchedPeople && fetchedPeople.length > 0) {
+                    const owner = fetchedPeople.find(person => person.PersonID === vehicle.OwnerID);
+                    if (owner) {
+                        vehicleDiv.innerHTML += `
+                            <strong>Owner's Name: </strong>${owner.Name}, 
+                            <strong>License Number: </strong>${owner.LicenseNumber}`;
+                    } else {
+                        vehicleDiv.innerHTML += `<strong>Owner's Name: </strong>Unknown, <strong>License Number: </strong>Unknown`;
+                    }
+                } else {
+                    // Handle case where fetchedPeople is undefined or empty
+                    vehicleDiv.innerHTML += `<strong>Owner's Name: </strong>Unknown, <strong>License Number: </strong>Unknown`;
                 }
-
-                results.appendChild(vehicleDiv); // Append the vehicleDiv to the .results div
+            
+                results.appendChild(vehicleDiv);
             });
         }
     }
