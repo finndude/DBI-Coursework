@@ -106,6 +106,13 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
         {
             searchResults.forEach(vehicle => 
             {
+                results.innerHTML = ""; // Clear any existing content inside the .results div
+
+                const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
+                resultsHeading.textContent = "Search Results";
+
+                results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
+
                 const vehicleDiv = document.createElement("div");
                 vehicleDiv.classList.add("vehicle-result");
 

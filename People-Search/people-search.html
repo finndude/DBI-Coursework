@@ -45,8 +45,18 @@
         <main class="mainBody">
 
             <form id="peopleSearchForm">
-                <p>Search by driver name: <input type="text" id="name"></p>
-                <p>Search by driving license number: <input type="text" id="license"></p>
+                <label for="name">Search by driver name:</label>
+                <input type="text" id="name" name="name" aria-label="Search by driver name" required>
+        
+                <br>
+                <br>
+
+                <label for="license">Search by driving license number:</label>
+                <input type="text" id="license" name="license" aria-label="Search by driving license number" required>
+        
+                <br>
+                <br>
+
                 <input type="submit" value="Submit">
             </form>
 

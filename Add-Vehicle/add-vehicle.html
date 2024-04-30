@@ -44,11 +44,36 @@
         <main class="mainBody">
 
             <form id="addVehicleForm">
-                <p>Enter the new registration number: <input type="text" id="rego"></p>
-                <p>Enter the new make: <input type="text" id="make"></p>
-                <p>Enter the new model: <input type="text" id="model"></p>
-                <p>Enter the new colour: <input type="text" id="colour"></p>
-                <p>Enter the new owner: <input type="text" id="owner"></p>
+                <label for="rego">Enter the new registration number:</label>
+                <input type="text" id="rego" name="rego" aria-label="Enter the new registration number" required>
+        
+                <br>
+                <br>
+
+                <label for="make">Enter the new make:</label>
+                <input type="text" id="make" name="make" aria-label="Enter the new make" required>
+        
+                <br>
+                <br>
+
+                <label for="model">Enter the new model:</label>
+                <input type="text" id="model" name="model" aria-label="Enter the new model" required>
+        
+                <br>
+                <br>
+
+                <label for="colour">Enter the new colour:</label>
+                <input type="text" id="colour" name="colour" aria-label="Enter the new colour" required>
+        
+                <br>
+                <br>
+
+                <label for="owner">Enter the new owner:</label>
+                <input type="text" id="owner" name="owner" aria-label="Enter the new owner" required>
+        
+                <br>
+                <br>
+
                 <button type="submit">Add vehicle</button>
             </form>
 
