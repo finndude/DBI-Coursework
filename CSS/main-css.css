@@ -114,3 +114,35 @@ footer
 }
 
 /*------------------------------------------------------------------------------------------------------*/
+
+/* Responsive layout changes for widths less than 500px */
+@media screen and (max-width: 500px) 
+{
+    #container 
+    {
+        grid-template-areas:
+            "header"
+            "main"
+            "sidebar"
+            "footer";
+        grid-template-rows: auto 1fr auto 14fr; /* Header, Main, Sidebar, Footer take up their content height */
+        grid-template-columns: auto; /* Single column layout */
+    }
+
+    nav ul 
+    {
+        flex-direction: column; /* Stack links vertically */
+        justify-content: center; /* Center links vertically */
+        align-items: center; /* Center links horizontally */
+    }
+
+    .sidebar 
+    {
+        order: 3; /* Move sidebar below main */
+    }
+
+    .mainBody 
+    {
+        order: 2; /* Move main above sidebar */
+    }
+}
