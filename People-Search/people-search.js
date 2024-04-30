@@ -109,40 +109,29 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
 
 /////////////////////////////////////////////////
 
-    else if (name.trim() !== "")
-    {
+try {
+    const { data, error } = await supabase
+        .from("People")
+        .select();
+
+    if (error) {
+        console.error("Error fetching data:", error.message);
+        return;
+    }
+
+    fetchedData = data;
+
+    results.innerHTML = ""; // Clear previous results
+
+    if (name.trim() !== "") {
         const searchTerm = name.toLowerCase(); // Convert the input and the names in the database to lowercase for case-insensitive comparison
 
+        const searchResults = fetchedData.filter(person => 
+            person.Name.toLowerCase().includes(searchTerm)
+        );
 
-        const searchResults = fetchedData.filter(person => // Filter the fetched data based on the search term
-        {
-            const fullName = `${person.Name}`.toLowerCase(); // Convert each person's name to lowercase for comparison
-            
-            return fullName.includes(searchTerm); // Check if the search term is included in the person's name
-        });
-
-
-        results.innerHTML = ""; // Clear any existing content inside the .results div
-
-        const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
-        resultsHeading.textContent = "Search Results";
-
-        results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
-
-////////////////////////
-
-        if (searchResults.length === 0) // Check if any results were found
-        {
-            //CODE TO MAKE THE MESSAGE APPEAR IN THE RESULTS ELEMENT
-            //const noResultsText = document.createElement("p");
-            //noResultsText.textContent = "No matching records found.";
-            //results.appendChild(noResultsText);
-            document.getElementById("message").textContent = "No result found";
-        } 
-        else 
-        {
-            searchResults.forEach(person => // Loop through each search result and display it
-            {
+        if (searchResults.length > 0) {
+            searchResults.forEach(person => {
                 const personDiv = document.createElement("div"); // Create a new div for each search result
                 personDiv.classList.add("person-result");
 
@@ -154,45 +143,20 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
             });
 
             document.getElementById("message").textContent = "Search successful";
+        } else {
+            // No matching records found
+            results.innerHTML = "<p>No matching records found</p>";
+            document.getElementById("message").textContent = "";
         }
-    }
-    
-/////////////////////////////////////////////////
-
-    else if (license.trim() !== "")
-    {
+    } else if (license.trim() !== "") {
         const searchTerm = license.toLowerCase(); // Convert the input and the license numbers in the database to lowercase for case-insensitive comparison
 
+        const searchResults = fetchedData.filter(person => 
+            person.LicenseNumber.toLowerCase().includes(searchTerm)
+        );
 
-        const searchResults = fetchedData.filter(person => // Filter the fetched data based on the search term
-        {
-            const personLicenseNumber = `${person.LicenseNumber}`.toLowerCase(); // Convert each person's license number to lowercase for comparison
-            
-            return personLicenseNumber.includes(searchTerm); // Check if the search term is included in the person's license number
-        });
-
-        
-        results.innerHTML = ""; // Clear any existing content inside the .results div
-
-        const resultsHeading = document.createElement("h2"); // Create a new heading element for the search results
-        resultsHeading.textContent = "Search Results";
-
-        results.appendChild(resultsHeading); // Append the resultsHeading to the .results div
-
-////////////////////////
-        
-        if (searchResults.length === 0) // Check if any results were found
-        {
-            //CODE TO MAKE THE MESSAGE APPEAR IN THE RESULTS ELEMENT
-            //const noResultsText = document.createElement("p");
-            //noResultsText.textContent = "No matching records found.";
-            //results.appendChild(noResultsText);
-            document.getElementById("message").textContent = "No result found";
-        } 
-        else 
-        {
-            searchResults.forEach(person => // Loop through each search result and display it
-            {
+        if (searchResults.length > 0) {
+            searchResults.forEach(person => {
                 const personDiv = document.createElement("div"); // Create a new div for each search result
                 personDiv.classList.add("person-result");
 
@@ -204,8 +168,15 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
             });
 
             document.getElementById("message").textContent = "Search successful";
+        } else {
+            // No matching records found
+            results.innerHTML = "<p>No matching records found</p>";
+            document.getElementById("message").textContent = "";
         }
     }
+} catch (error) {
+    console.error("Error:", error.message);
+}
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
