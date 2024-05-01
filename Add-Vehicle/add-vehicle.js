@@ -277,28 +277,33 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
                 personForm.appendChild(idLabel);
                 personForm.appendChild(idInput);
-                personForm.appendChild(document.createElement("br")); //Add space between the input box and the submit button
+                personForm.appendChild(document.createElement("br"));
+                personForm.appendChild(document.createElement("br"));
 
                 personForm.appendChild(nameLabel);
                 personForm.appendChild(nameInput);
-                personForm.appendChild(document.createElement("br")); //Add space between the input box and the submit button
+                personForm.appendChild(document.createElement("br"));
+                personForm.appendChild(document.createElement("br"));
 
                 personForm.appendChild(addressLabel);
                 personForm.appendChild(addressInput);
-                personForm.appendChild(document.createElement("br")); //Add space between the input box and the submit button
+                personForm.appendChild(document.createElement("br"));
+                personForm.appendChild(document.createElement("br"));
 
                 personForm.appendChild(dobLabel);
                 personForm.appendChild(dobInput);
-                personForm.appendChild(document.createElement("br")); //Add space between the input box and the submit button
+                personForm.appendChild(document.createElement("br"));
+                personForm.appendChild(document.createElement("br"));
 
                 personForm.appendChild(licenseLabel);
                 personForm.appendChild(licenseInput);
-                personForm.appendChild(document.createElement("br")); //Add space between the input box and the submit button
+                personForm.appendChild(document.createElement("br"));
+                personForm.appendChild(document.createElement("br"));
 
                 personForm.appendChild(expireLabel);
                 personForm.appendChild(expireInput);
-                personForm.appendChild(document.createElement("br")); //Add space between the input box and the submit button
-                personForm.appendChild(document.createElement("br")); //Add space between the input box and the submit button
+                personForm.appendChild(document.createElement("br"));
+                personForm.appendChild(document.createElement("br"));
 
                 personForm.appendChild(submitPersonDetails);
                 results.appendChild(personForm);
