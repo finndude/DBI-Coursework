@@ -145,4 +145,16 @@ footer
     {
         order: 2; /* Move main above sidebar */
     }
+
+    footer 
+    {
+        grid-area: footer;
+        border: 1px solid black; /* Add border around the footer */
+        padding: 10px 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: calc(14 * 100vw / 15); /* Width ratio of 14/15 of the viewport width */
+    }
 }
