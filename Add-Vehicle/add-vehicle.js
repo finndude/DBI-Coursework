@@ -95,12 +95,12 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
             if (existingVehicles && existingVehicles.length > 0) // If the regNum exists, display an error message
             {
-                const resultText = document.createElement("p"); // Create a new paragraph element for the result
-                resultText.textContent = `Registration: ${rego} is already in the database!`;
+                //const resultText = document.createElement("p"); // Create a new paragraph element for the result
+                //resultText.textContent = `Registration: ${rego} is already in the database!`;
 
-                results.appendChild(resultText); // Append the result below the existing results heading
+                //results.appendChild(resultText); // Append the result below the existing results heading
 
-                document.getElementById("message").textContent = "Error";
+                document.getElementById("message").textContent = "Registration: ${rego} is already in the database!`;";
 
                 setTimeout(() => // Set a timeout to remove the result after 2.5 seconds
                 {
