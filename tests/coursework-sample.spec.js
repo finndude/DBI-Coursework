@@ -195,9 +195,28 @@ test('Registration Taken', async ({page}) => {
 })
 
 
+// People search with license number
+test ('Search "RW765FR" should return one record', async ({page}) => {
+   await page.locator('#license').fill('RW765FR')
+   await page.getByRole('button', { name: 'Submit' }).click();
+   await expect(page.locator('#results')).toContainText('Lewis Thomson')
+   await expect(page.locator('#results')).toContainText('RW765FR')
+   await expect(page.locator('#results').locator('div')).toHaveCount(2)
+   await expect(page.locator('#message')).toContainText('Search successful')
+})
+
+
 // People search with a person who doesn't exist
 test ('Person does not exist', async ({page}) => {
    await page.locator('#name').fill('Timmy')
+   await page.getByRole('button', { name: 'Submit' }).click();
+   await expect(page.locator('#message')).toContainText('No matching records found')
+})
+
+
+// People search with a license number which doesn't exist
+test ('License does not exist', async ({page}) => {
+   await page.locator('#license').fill('HT492HJ')
    await page.getByRole('button', { name: 'Submit' }).click();
    await expect(page.locator('#message')).toContainText('No matching records found')
 })
