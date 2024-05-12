@@ -156,3 +156,42 @@ test('add a vehicle', async ({page}) => {
    await expect(page.locator('#results')).toContainText('SD876ES')
    await expect(page.locator('#results').locator('div')).toHaveCount(1)
 })
+
+// Additional Tests I Created
+
+// Add a vehicle (Owner already in database)
+test('add a vehicle (owner already exists)', async ({page}) => {
+   await page.getByRole('link', { name: 'Add a vehicle' }).click();
+   await page.locator('#rego').fill('JSU91FE')
+   await page.locator('#make').fill('Bugatti')
+   await page.locator('#model').fill('Veyron')
+   await page.locator('#colour').fill('Black')
+   await page.locator('#owner').fill('Rachel Johnson')
+   await page.getByRole('button', { name: 'Add vehicle' }).click();
+
+   var seconds = 3;
+   await new Promise((resolve) => setTimeout(resolve, seconds * 1000));  //Delay 3 seconds
+
+   await page.getByRole('link', { name: 'Vehicle search' }).click();
+   await page.locator('#rego').fill('JSU91FE')
+   await page.getByRole('button', { name: 'Submit' }).click();
+   await expect(page.locator('#results')).toContainText('Bugatti')
+   await expect(page.locator('#results')).toContainText('Rachel Johnson')
+   await expect(page.locator('#results').locator('div')).toHaveCount(1)
+   await expect(page.locator('#message')).toContainText('Search successful')
+})
+
+
+// Vehicle Registration Taken
+test('add a vehicle (owner already exists)', async ({page}) => {
+   await page.getByRole('link', { name: 'Add a vehicle' }).click();
+   await page.locator('#rego').fill('KWK24JI')
+   await page.locator('#make').fill('Bugatti')
+   await page.locator('#model').fill('Veyron')
+   await page.locator('#colour').fill('Black')
+   await page.locator('#owner').fill('Rachel Johnson')
+   await expect(page.locator('#results')).toContainText('Registration: KWK24JI is already in the database!')
+   await expect(page.locator('#results').locator('div')).toHaveCount(1)
+   await expect(page.locator('#message')).toContainText('Error')
+
+})
