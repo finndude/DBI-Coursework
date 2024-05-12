@@ -183,7 +183,7 @@ test('add a vehicle (owner already exists)', async ({page}) => {
 
 
 // Vehicle Registration Taken
-test('add a vehicle (owner already exists)', async ({page}) => {
+test('Registration Taken', async ({page}) => {
    await page.getByRole('link', { name: 'Add a vehicle' }).click();
    await page.locator('#rego').fill('KWK24JI')
    await page.locator('#make').fill('Bugatti')
@@ -193,5 +193,4 @@ test('add a vehicle (owner already exists)', async ({page}) => {
    await expect(page.locator('#results')).toContainText('Registration: KWK24JI is already in the database!')
    await expect(page.locator('#results').locator('div')).toHaveCount(1)
    await expect(page.locator('#message')).toContainText('Error')
-
 })
