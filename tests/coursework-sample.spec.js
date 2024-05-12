@@ -193,3 +193,11 @@ test('Registration Taken', async ({page}) => {
    await page.getByRole('button', { name: 'Add vehicle' }).click();
    await expect(page.locator('#message')).toContainText('Registration: KWK24JI is already in the database!')
 })
+
+
+// People search with a person who doesn't exist
+test ('Person does not exist', async ({page}) => {
+   await page.locator('#name').fill('Timmy')
+   await page.getByRole('button', { name: 'Submit' }).click();
+   await expect(page.locator('#message')).toContainText('No matching records found')
+})

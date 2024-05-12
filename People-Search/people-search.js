@@ -165,8 +165,7 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
             else 
             {
                 // No matching records found
-                results.innerHTML += "<p>No matching records found</p>";
-                document.getElementById("message").textContent = "";
+                document.getElementById("message").textContent = "No matching records found";
             }
         } 
 
