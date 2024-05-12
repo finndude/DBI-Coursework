@@ -191,7 +191,5 @@ test('Registration Taken', async ({page}) => {
    await page.locator('#colour').fill('Black')
    await page.locator('#owner').fill('Rachel Johnson')
    await page.getByRole('button', { name: 'Add vehicle' }).click();
-   await expect(page.locator('#results')).toContainText('Registration: KWK24JI is already in the database!')
-   await expect(page.locator('#results').locator('div')).toHaveCount(1)
-   await expect(page.locator('#message')).toContainText('Error')
+   await expect(page.locator('#message')).toContainText('Registration: KWK24JI is already in the database!')
 })

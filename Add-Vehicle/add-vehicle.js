@@ -100,7 +100,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
 
                 //results.appendChild(resultText); // Append the result below the existing results heading
 
-                document.getElementById("message").textContent = "Registration: ${rego} is already in the database!`;";
+                document.getElementById("message").textContent = `Registration: ${rego} is already in the database!`;
 
                 setTimeout(() => // Set a timeout to remove the result after 2.5 seconds
                 {
