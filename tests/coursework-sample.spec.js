@@ -205,8 +205,8 @@ test('add a vehicle (owner already exists)', async ({page}) => {
    await page.locator('#owner').fill('Rachel Johnson')
    await page.getByRole('button', { name: 'Add vehicle' }).click();
 
-   var seconds = 3;
-   await new Promise((resolve) => setTimeout(resolve, seconds * 1000));  //Delay 3 seconds
+   var seconds = 5;
+   await new Promise((resolve) => setTimeout(resolve, seconds * 1000));  //Delay 35 seconds
 
    await page.getByRole('link', { name: 'Vehicle search' }).click();
    await page.locator('#rego').fill('JSU91FE')
@@ -230,6 +230,7 @@ test('Registration Taken', async ({page}) => {
    await expect(page.locator('#message')).toContainText('Registration: KWK24JI is already in the database!')
 })
 
+
 // ID not an integer
 test('ID not an integer', async ({page}) => {
    await page.getByRole('link', { name: 'Add a vehicle' }).click();
@@ -252,3 +253,46 @@ test('ID not an integer', async ({page}) => {
    await expect(page.locator('#message')).toContainText('ID must be an integer')
 })
 
+
+// DOB not in YYYY-MM-DD format
+test('DOB in incorrect format', async ({page}) => {
+   await page.getByRole('link', { name: 'Add a vehicle' }).click();
+   await page.locator('#rego').fill('LSO39SM')
+   await page.locator('#make').fill('Ford')
+   await page.locator('#model').fill('Focus')
+   await page.locator('#colour').fill('Orange')
+   await page.locator('#owner').fill('Eden')
+   await page.getByRole('button', { name: 'Add vehicle' }).click();
+   
+   await page.locator('#personid').fill('190')
+   await page.locator('#name').fill('Eden')
+   await page.locator('#address').fill('London')
+   await page.locator('#dob').fill('June 19th 2005')
+   await page.locator('#license').fill('SD876ES')
+   await page.locator('#expire').fill('2025-06-19')
+   await page.getByRole('button', { name: 'Add owner' }).click();
+
+   await expect(page.locator('#message')).toContainText('ID must be an integer')
+})
+
+
+// Expiry not in YYYY-MM-DD format
+test('Expiry in incorrect format', async ({page}) => {
+   await page.getByRole('link', { name: 'Add a vehicle' }).click();
+   await page.locator('#rego').fill('AIM37NG')
+   await page.locator('#make').fill('Toyota')
+   await page.locator('#model').fill('Yaris')
+   await page.locator('#colour').fill('Red')
+   await page.locator('#owner').fill('Nicolas')
+   await page.getByRole('button', { name: 'Add vehicle' }).click();
+   
+   await page.locator('#personid').fill('205')
+   await page.locator('#name').fill('Nicolas')
+   await page.locator('#address').fill('London')
+   await page.locator('#dob').fill('2025-06-19')
+   await page.locator('#license').fill('SD876ES')
+   await page.locator('#expire').fill('June 19th 2025')
+   await page.getByRole('button', { name: 'Add owner' }).click();
+
+   await expect(page.locator('#message')).toContainText('ID must be an integer')
+})
