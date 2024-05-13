@@ -208,20 +208,20 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                     const license = document.getElementById("license").value;
                     const expire = document.getElementById("expire").value;
 
-                    // Function to validate date format (YYYY-MM-DD)
-                    function isValidDateFormat(dateString)
-                    {
-                        const regex = /^\d{4}-\d{2}-\d{2}$/;
-
-                        return regex.test(dateString);
-                    }
-
                     // Check if personid is an integer
                     if (!Number.isInteger(parseInt(personid))) 
                     {
                         document.getElementById("message").textContent = "ID must be an integer";
                         
                         return;
+                    }
+
+                    // Function to validate date format (YYYY-MM-DD)
+                    function isValidDateFormat(dateString)
+                    {
+                        const regex = /^\d{4}-\d{2}-\d{2}$/;
+
+                        return regex.test(dateString);
                     }
 
                     // Check if date of birth is in the correct format (YYYY-MM-DD)
