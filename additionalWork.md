@@ -59,6 +59,14 @@ I have also added links to each file so you can see the relevant lines of code i
 ### Expiry In The Incorrect Format
 * This is an additional feature that I have added to the website. This feature will check if the Expiry Date that the user has entered correctly follows the YYYY-MM-DD format that supabase requires. If it doesn't match this format then it will output a message to the user to tell them that the date must be in YYYY-MM-DD format. You can see the code for this from lines 219-233 in add-vehicle.js. The code for the test is on lines 280-299 in coursework-sample-spec.js.
 
+## Accessibility
+* All 3 of my pages successfully scored 100 on the Lighthouse Accessibility Test - See images of this below
+![Person Search Lighthouse Accessibility Test](assets/personSearchLighthouse.png)
+<br>
+![Vehicle Search Lighthouse Accessibility Test](assets/vehicleSearchLighthouse.png)
+<br>
+![Add Vehicle Lighthouse Accessibility Test](assets/addVehicleSearchLighthouse.png)
+
 ## Other Comments
 
 * Within my code I have a large portion of commented out code that would implement some other features. An example of this is on lines 9-42 in people-search.js. What this code would have done is make it so that the user is only able to type into one box, and as soon as they enter text into one of the boxes, the other becomes disabled, meaning it is only ever possible for one to box to have an input. I commented it out because this would interfere with the tests and the requirements of the coursework, as we need to check that it outputs 'Error' if both boxes are filled. Feel free to uncomment the code and check it works etc. However, I understand if this is not valid to be marked.
