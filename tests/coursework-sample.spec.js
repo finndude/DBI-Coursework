@@ -118,6 +118,7 @@ test ('search "rachel" should return two records', async ({page}) => {
    await expect(page.locator('#message')).toContainText('Search successful')
 })
 
+
 // vehicle search
 test('search "KWK24JI" should return tesla but no owner', async ({page}) => {
    await page.getByRole('link', { name: 'Vehicle search' }).click();
@@ -272,7 +273,7 @@ test('DOB in incorrect format', async ({page}) => {
    await page.locator('#expire').fill('2025-06-19')
    await page.getByRole('button', { name: 'Add owner' }).click();
 
-   await expect(page.locator('#message')).toContainText('ID must be an integer')
+   await expect(page.locator('#message')).toContainText('Date must be in YYYY-MM-DD format')
 })
 
 
@@ -294,5 +295,5 @@ test('Expiry in incorrect format', async ({page}) => {
    await page.locator('#expire').fill('June 19th 2025')
    await page.getByRole('button', { name: 'Add owner' }).click();
 
-   await expect(page.locator('#message')).toContainText('ID must be an integer')
+   await expect(page.locator('#message')).toContainText('Date must be in YYYY-MM-DD format')
 })
