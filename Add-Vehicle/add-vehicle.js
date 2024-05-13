@@ -208,7 +208,15 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                     const license = document.getElementById("license").value;
                     const expire = document.getElementById("expire").value;
 
-                    if (personid.trim() !== "" && name.trim() !== "" && address.trim() !== "" && dob.trim() !== "" && license.trim() !== "" && expire.trim() !== "") 
+                    // Check if personid is an integer
+                    if (!Number.isInteger(parseInt(personid))) 
+                    {
+                        document.getElementById("message").textContent = "ID must be an integer";
+                        
+                        return;
+                    }
+
+                    else if (personid.trim() !== "" && name.trim() !== "" && address.trim() !== "" && dob.trim() !== "" && license.trim() !== "" && expire.trim() !== "") 
                     {
                         try 
                         {

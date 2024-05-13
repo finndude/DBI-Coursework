@@ -229,3 +229,26 @@ test('Registration Taken', async ({page}) => {
    await page.getByRole('button', { name: 'Add vehicle' }).click();
    await expect(page.locator('#message')).toContainText('Registration: KWK24JI is already in the database!')
 })
+
+// ID not an integer
+test('ID not an integer', async ({page}) => {
+   await page.getByRole('link', { name: 'Add a vehicle' }).click();
+   await page.locator('#rego').fill('SDF19FD')
+   await page.locator('#make').fill('McLaren')
+   await page.locator('#model').fill('720S')
+   await page.locator('#colour').fill('Cream')
+   await page.locator('#owner').fill('Marcelo')
+   await page.getByRole('button', { name: 'Add vehicle' }).click();
+   
+   
+   await page.locator('#personid').fill('Nineteen')
+   await page.locator('#name').fill('Marcelo')
+   await page.locator('#address').fill('London')
+   await page.locator('#dob').fill('2005-06-19')
+   await page.locator('#license').fill('SD876ES')
+   await page.locator('#expire').fill('2025-06-19')
+   await page.getByRole('button', { name: 'Add owner' }).click();
+
+   await expect(page.locator('#message')).toContainText('ID must be an integer')
+})
+
