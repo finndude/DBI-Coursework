@@ -208,7 +208,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                     const license = document.getElementById("license").value;
                     const expire = document.getElementById("expire").value;
 
-                    if (personid.trim() !== "" && name.trim() !== "" || address.trim() !== "" || dob.trim() !== "" || license.trim() !== "" || expire.trim() !== "") 
+                    if (personid.trim() !== "" && name.trim() !== "" && address.trim() !== "" && dob.trim() !== "" && license.trim() !== "" && expire.trim() !== "") 
                     {
                         try 
                         {
@@ -274,6 +274,14 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                         }
 
                         //maxPersonID = maxPersonID + 1; //RELATED TO AUTOINCREMENT
+                    }
+                    
+                    // If any of the fields are empty
+                    else
+                    {
+                        document.getElementById("message").textContent = "Error";
+
+                        return;
                     }
                 });
 

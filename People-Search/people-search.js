@@ -165,7 +165,7 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
             else 
             {
                 // No matching records found
-                document.getElementById("message").textContent = "No matching records found";
+                document.getElementById("message").textContent = "No result found";
             }
         } 
 
@@ -203,7 +203,7 @@ document.getElementById("peopleSearchForm").addEventListener("submit", async (ev
             else 
             {
                 // No matching records found
-                document.getElementById("message").textContent = "No matching records found";
+                document.getElementById("message").textContent = "No result found";
             }
         }
     } 

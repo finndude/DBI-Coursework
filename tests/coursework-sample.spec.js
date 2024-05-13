@@ -157,7 +157,43 @@ test('add a vehicle', async ({page}) => {
    await expect(page.locator('#results').locator('div')).toHaveCount(1)
 })
 
+
+
 // Additional Tests I Created
+
+// People search with license number
+test ('Search "RW765FR" should return one record', async ({page}) => {
+   await page.locator('#license').fill('RW765FR')
+   await page.getByRole('button', { name: 'Submit' }).click();
+   await expect(page.locator('#results')).toContainText('Lewis Thomson')
+   await expect(page.locator('#results')).toContainText('RW765FR')
+   await expect(page.locator('#results').locator('div')).toHaveCount(1)
+   await expect(page.locator('#message')).toContainText('Search successful')
+})
+
+
+// People search with a person who doesn't exist
+test ('Person does not exist', async ({page}) => {
+   await page.locator('#name').fill('Timmy')
+   await page.getByRole('button', { name: 'Submit' }).click();
+   await expect(page.locator('#message')).toContainText('No result found')
+})
+
+
+// People search with a license number which doesn't exist
+test ('License does not exist', async ({page}) => {
+   await page.locator('#license').fill('HT492HJ')
+   await page.getByRole('button', { name: 'Submit' }).click();
+   await expect(page.locator('#message')).toContainText('No result found')
+})
+
+// Vehicle search with non existent number plate
+test('Vehicle search with non existent number plate', async ({page}) => {
+   await page.getByRole('link', { name: 'Vehicle search' }).click();
+   await page.locator('#rego').fill('HGT38SO')
+   await page.getByRole('button', { name: 'Submit' }).click();
+   await expect(page.locator('#message')).toContainText('No result found')
+})
 
 // Add a vehicle (Owner already in database)
 test('add a vehicle (owner already exists)', async ({page}) => {
@@ -192,39 +228,4 @@ test('Registration Taken', async ({page}) => {
    await page.locator('#owner').fill('Rachel Johnson')
    await page.getByRole('button', { name: 'Add vehicle' }).click();
    await expect(page.locator('#message')).toContainText('Registration: KWK24JI is already in the database!')
-})
-
-
-// People search with license number
-test ('Search "RW765FR" should return one record', async ({page}) => {
-   await page.locator('#license').fill('RW765FR')
-   await page.getByRole('button', { name: 'Submit' }).click();
-   await expect(page.locator('#results')).toContainText('Lewis Thomson')
-   await expect(page.locator('#results')).toContainText('RW765FR')
-   await expect(page.locator('#results').locator('div')).toHaveCount(1)
-   await expect(page.locator('#message')).toContainText('Search successful')
-})
-
-
-// People search with a person who doesn't exist
-test ('Person does not exist', async ({page}) => {
-   await page.locator('#name').fill('Timmy')
-   await page.getByRole('button', { name: 'Submit' }).click();
-   await expect(page.locator('#message')).toContainText('No matching records found')
-})
-
-
-// People search with a license number which doesn't exist
-test ('License does not exist', async ({page}) => {
-   await page.locator('#license').fill('HT492HJ')
-   await page.getByRole('button', { name: 'Submit' }).click();
-   await expect(page.locator('#message')).toContainText('No matching records found')
-})
-
-// Vehicle search with non existent number plate
-test('Vehicle search with non existent number plate', async ({page}) => {
-   await page.getByRole('link', { name: 'Vehicle search' }).click();
-   await page.locator('#rego').fill('HGT38SO')
-   await page.getByRole('button', { name: 'Submit' }).click();
-   await expect(page.locator('#message')).toContainText('No matching records found')
 })

@@ -137,7 +137,7 @@ document.getElementById("vehicleSearchForm").addEventListener("submit", async (e
         else 
         {
             // No matching records found
-            document.getElementById("message").textContent = "No matching records found";
+            document.getElementById("message").textContent = "No result found";
         }
     } 
     
