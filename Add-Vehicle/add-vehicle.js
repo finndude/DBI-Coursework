@@ -225,7 +225,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", async (even
                     }
 
                     // Check if date of birth is in the correct format (YYYY-MM-DD)
-                    if (!isValidDateFormat(dob)) 
+                    if (!isValidDateFormat(dob) || !isValidDateFormat(expire)) 
                     {
                         document.getElementById("message").textContent = "Date must be in YYYY-MM-DD format";
 
